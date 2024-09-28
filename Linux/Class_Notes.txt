@@ -1,0 +1,129 @@
+SkillfyMe - DevOps with AI Training Programme 
+
+#########################
+Day - 1 | 28th Sep. 2024
+#########################
+
+Fundamentals of Linux :::
+
+	Linux on DevOps Perspectives :::
+
+	1. Overview of Linux Operating System 
+	2. Core Concepts of Linux OS 
+	
+	Roles and Responsibilities of DevOps Team on Linux ::
+	
+		1. What is Linux Operating System?
+		2. Handling the Files on Linux Machines 
+		3. Package Management 
+			--> Install / Uninstall / Upgrade the Linux Packages 
+		4. User Management 
+		5. Access Management
+		6. Networking - Access the Remote Servers 
+		7. Process Automation
+			- Shell Scripting
+			
+	Operating Systems :
+	
+		Windows OS 
+		
+		Linux OS ::
+		
+			- Linux is Open-Source 
+			- Linux OS is highly secured
+			- Linux based on Command Line User Interface
+			- Linux Operating System - Is Considered as a core for any computing environment which need a reliable environment.
+			- Kernel --> Core of Linux OS 
+			- Core of Linux OS is called kernel!
+			Components of Linux OS Architecture
+				- Networking 
+				- Storage 
+				- IPC - Inter Process Communication
+				- User Management 
+				- Security Management 
+				- Control Groups 
+				- Namespace 
+				- Process 	
+	
+	How to Work with Linux Operating System :::
+	
+		Linux 
+		
+		1. Create a free-tier on AWS Cloud Platform 
+				https://aws.amazon.com/console/
+				
+				- Active Email_ID 
+				- Active Mobile Number 
+				- Active Credit/Debit Card Number with International Transaction enabled.
+				
+		2. Create Linux based Virtual Machines
+		
+		3. Connect to AWS EC2 Instance (VM)
+		
+			- EC2 Instance Connect thru web browser
+			
+			- SSH Agent :		# For Windows Users 
+				- MobaXterm 		# https://mobaxterm.mobatek.net/download.html
+									# https://mobaxterm.mobatek.net/download-home-edition.html
+										- Choose MobaXterm Home Edition 
+										- Download zipfile
+											- Extract and run the exec file.
+											
+				SSH Connection using Key based Authention :
+
+					- HostName 
+					- UserName 
+					- User_Credential(Private_Key)
+						
+				- Putty 
+				
+			- Terminal 			# Mac / Linux Users 
+			
+		4. Start working on Linux 
+			
+			
+	Login to AWS Console 
+	
+	Choose Nearest AWS Region 
+	
+	Select EC2 Service - goto EC2 Dashboard 
+	
+	AMI ::
+	
+		Types/Distributions of Linux ::
+		
+			- RHEL / Centos 
+			
+			- Debian/Ubuntu 				# Will be using this as Default Linux
+			
+			- Fedora 
+			
+			- Amazon Linux 
+			
+		
+	Choose AMI : Ubuntu 22.04 LTS Version	
+		
+		
+		1 VM --> 750 Hrs/Month
+		
+		10 VMs --> 75 Hrs/Month 
+		
+		
+		
+Tasks :::
+	
+		1. Linux Cli Command 
+		2. Handling the Files on Linux Machines 
+		3. Package Management 
+			--> Install / Uninstall / Upgrade the Linux Packages 
+		4. User Management 
+		5. Access Management
+		6. Networking - Access the Remote Servers 
+		7. Process Automation
+			- Shell Scripting
+	
+	
+	Repository - Github 
+	
+	GITHUB is a Remote Repository for managing the Files and Folder.
+		- https://github.com/
