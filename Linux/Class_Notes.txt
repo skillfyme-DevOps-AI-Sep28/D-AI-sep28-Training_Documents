@@ -127,3 +127,16 @@ Tasks :::
 	
 	GITHUB is a Remote Repository for managing the Files and Folder.
 		- https://github.com/
+
+		
+
+	Linux Cli Commands ::
+	
+		- clear 			# Clear the Screen
+		
+		Linux User Profile 
+			ubuntu 			# Login purpose 
+			
+			root			# Linux Admin Purpose 
+			
+		- pwd 				# Present Working Directory 	
