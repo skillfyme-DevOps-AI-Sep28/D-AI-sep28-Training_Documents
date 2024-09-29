@@ -140,3 +140,372 @@ Tasks :::
 			root			# Linux Admin Purpose 
 			
 		- pwd 				# Present Working Directory 	
+
+
+
+#########################
+Day - 2 | 29th Sep. 2024
+#########################
+
+
+	Linux Cli Commands ::
+		
+			Basic Architecture :
+			
+	Types/Distributions of Linux ::
+		
+			- RHEL / Centos 
+			
+			- Debian/Ubuntu 				# Will be using this as Default Linux
+			
+			- Fedora 
+			
+			- Amazon Linux 
+			
+		
+	Package Manager :
+		
+	Package Management ::
+		
+		--> Install / Uninstall / Upgrade the Linux Packages 
+		
+		Linux Distribution 					Package Manager 
+		
+		- RHEL / Centos 		===>			yum 
+		
+		- Debian/Ubuntu 		===> 			apt 	
+		
+		- Fedora 				===> 			dnf(latest version) / yum(previous version) 
+		
+		- Amazon Linux 			===> 			dnf(latest version) / yum(previous version)
+		
+		
+		Package Managers can be executed only as a root user. 
+		
+		On Linux Ubuntu Machine :
+		
+			apt install git
+			
+			apt remove git 
+			
+			apt upgrade git 
+		
+		Handling the Files on Linux Machines 
+		Package Management 
+			--> Install / Uninstall / Upgrade the Linux Packages 
+
+		sudo -i 				# Elevate the access to root user.
+		
+		exit 					# Logout from user account
+		
+		apt update -y			# Update the Default packages 
+		
+		
+		To install any package ::::
+		
+			1. Install the pre-requisites  (if exist)
+			
+			2. Install the actual package 
+			
+			3. Post Installation Activities 
+		
+		
+		git 
+		
+		Package ::
+		
+			- Simple tool 		# jdk/git/maven
+					apt install jdk11
+			
+			- Service 			# jenkins/tomcat/nginx 
+					apt install nginx -y
+					
+					nginx -version
+
+					
+			systemctl status nginx 
+			systemctl start nginx 
+			systemctl stop nginx 
+			systemctl restart nginx 
+			systemctl enable nginx 				# To enable nginx as a start-up service
+			
+			
+			which nginx 						# Get the installation path.
+			
+		Periodic Upgrade of the package
+		
+		
+		
+	File/Directory Management :::
+	
+	
+		- Home Directory		
+		
+		- Root Directory	
+
+
+		cd 				# Change Directory
+		
+		mkdir 			# Create / Make Directory
+		
+		ls 				# To list the files and folders 
+		
+		ll				# To get the long list 
+		
+		ls -a 			# To list all the files and folders including the hidden files & folders.
+		
+		cd ..			# change to previous directory
+		
+		echo "Hello"			# Print any msg to terminal
+		
+		To Create any file on Linux :
+		
+			- touch <file_name>		# Used to create a empty file
+		
+			- echo "Hello" > testfile1.txt		# Create a file with new record
+			- echo "rec3" >> file1.txt			# create a file / Add New record to the file 
+			
+			- vi <file_name>		# Create/Edit file using vi editor 
+			
+				press ==> 'i'			# goto insert mode 
+				
+				#Enter the file contents...
+				.....
+				
+				press ==> 'esc key'		# come out of insert mode 
+				
+				type  ==> :wq			# write and quit from the file 	
+				
+				type  ==> :q!			# Exit without saving the file 
+				
+				
+		cp file1.txt sub-dir1/			# Copy file from one directory to another 
+		
+		mv file1.txt sub-dir1/			# Move file from one directory to another
+				
+		mv testfile1.txt dummyfile1.txt		# Rename the file
+		mv *.txt sub-dir1/
+		
+		
+		rm <file_name>						# remove the file 
+
+		rm -r <dir_name>					# remove the directory 
+		rm -rf <dir_name>					# Force removal of directory
+		
+
+		cat <file_name>		# Read the file content
+		
+		ll
+		
+		
+		File Access Level :
+		
+		
+		drwxrwxr-x 2 ubuntu ubuntu 4096 Sep 29 15:30 sdir2/				# Directory 
+		
+		
+		-rw-rw-r-- 1 ubuntu ubuntu    5 Sep 29 15:30 test				# File 
+		
+		
+	
+		d---------														
+						# First Char: d or -	Denote the directory or file 	
+
+		----------
+
+
+		----------
+		
+		-									# Denote dir or file (Possible value:  d or - )
+												'd'  Denotes Directory
+												'-'  Denotes File 
+												
+												
+		 ---								# Denote the Owner Level Access 
+												Possible Values: r / w /x 
+												r - Read only Access 
+												w - Write Access 
+												x - Execute Access 
+		
+			---								# Denote the Group Level Access
+												Possible Values: r / w /x 
+												r - Read only Access 
+												w - Write Access 
+												x - Execute Access
+
+			   ---							# Denote the Public User Level Access
+												Possible Values: r / w /x 
+												r - Read only Access 
+												w - Write Access 
+												x - Execute Access
+												
+		drwx			# Used to get the access of the Owner  
+		
+		
+		drwxrwx 		# Used to get the access of the Users part of the User Group 
+		
+		
+		drwxrwxrwx		# Used to get the access level of the external/public User 
+		
+		
+		Access Mode :
+		
+			- Read 
+			- Write 
+			- Execute 
+		
+		Three levels of users 
+		
+			- Owner 		
+			
+			- Group User 
+			
+			- Public User 
+			
+		The Access Mode can be controlled using :
+		
+			chmod 			https://chmod-calculator.com/
+			
+					chmod 744 sdir1/			
+			
+			chown 
+
+    1  clear
+    2  sudo -i
+    3  pwd
+    4  clear
+    5  apt install git
+    6  sudo -i
+    7  clear
+    8  sudo -i
+    9  pwd
+   10  clear
+   11  mkdir dir1
+   12  ls
+   13  pwd
+   14  ls
+   15  cd dir1/
+   16  pwd
+   17  ls
+   18  mkdir sub-dir1
+   19  ls
+   20  cd ..
+   21  pws
+   22  pwd
+   23  clear
+   24  echo "Hello"
+   25  clear
+   26  ls
+   27  cd dir1/
+   28  ls
+   29  touch testfile1.txt
+   30  ls
+   31  echo "rec1" >> file1.txt
+   32  ls
+   33  cat file1.txt
+   34  cat testfile1.txt
+   35  echo "rec2" >> file1.txt
+   36  cat file1.txt
+   37  echo "rec3" >> file1.txt
+   38  cat file1.txt
+   39  echo "dummy-record" > file1.txt
+   40  cat file1.txt
+   41  clear
+   42  ls
+   43  vi samplefile1.txt
+   44  cat samplefile1.txt
+   45  vi samplefile2.txt
+   46  cat samplefile2.txt
+   47  ls
+   48  cd sub-dir1/
+   49  ls
+   50  clear
+   51  cd ..
+   52  ls
+   53  cp file1.txt sub-dir1/
+   54  ls
+   55  cd sub-dir1/
+   56  ls
+   57  cd ..
+   58  ls
+   59  mv testfile1.txt sub-dir1/
+   60  ls
+   61  cd sub-dir1/
+   62  ls
+   63  mv testfile1.txt dummyfile1.txt
+   64  ls
+   65  rm file1.txt
+   66  ls
+   67  rm *.txt
+   68  ls
+   69  cd ..
+   70  ls
+   71  clear
+   72  ls
+   73  rm sub-dir1/
+   74  rm -r sub-dir1/
+   75  ls
+   76  clear
+   77  ls
+   78  mkdir sdir1
+   79  mkdir sdir2
+   80  mkdir sample
+   81  mkdir plane
+   82  echo "rec1" > test
+   83  echo "rec1" > sam
+   84  echo "rec1" > new1
+   85  clear
+   86  ls
+   87  ll
+   88  chmod 700 test
+   89  ll
+   90  chmod 444 test
+   91  ll
+   92  vi test
+   93  chmod 744 test
+   94  ll
+   95  chmod 744 sdir1/
+   96  ll
+   97  clear
+   98  ls
+   99  ls -a
+  100  cd ..
+  101  clear
+  102  history
+
+		
+Next :::
+			
+	User Management	:::
+	
+		Create Linux User
+
+		Create the User Credentials 
+			- Password 
+		
+		
+		RBAC - Role Based Access Control 
+		
+		user1 --> dev_Team 
+		user2 --> dev_Team
+		
+		devusergrp 
+		
+		As a best practice we manage the users as a group.
+		
+		
+		Authentication Methods ::
+		
+			- Password based Authentication
+			
+			- Key-based Authentication
+			
+			- Token based Authentication
+			
+			- Passwordless Authentication
+			
+	Handling remoter servers 	
+	
+	Shell Scripting 
+
+
