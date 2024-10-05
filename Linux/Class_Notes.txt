@@ -576,7 +576,7 @@ Day - 3 | 5th Oct. 2024
 				
 			chmod 600 /home/devopsadmin/.ssh/*					# Used to Change the Access Mode of Files or Directories
 			
-			
+			chown -R devopsadmin:devopsadmin /opt/tesdir1/		# Used to Change the Ownership of Files or Directories
 			
 			
 		Get the List of Linux Users ::::
