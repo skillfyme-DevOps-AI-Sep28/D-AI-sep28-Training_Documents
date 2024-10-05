@@ -508,4 +508,219 @@ Next :::
 	
 	Shell Scripting 
 
+		
+#########################
+Day - 3 | 5th Oct. 2024
+#########################
+
+	User Management and Access Management ::::
+	
+		- ubuntu user 
+		- root user 
+		
+		- devopsadmin --> perform all the devops related task
+		
+		
+		While handling remote servers :
+		
+			SSH Connection :
+			
+				SSH Authentication Methods :
+				
+					- Password based Authentication
+					
+					- Token Based Authentication
+					
+					- Key Based Authentication
+						-> Public Key / Authorized Key
+						-> Private Key 
+						
+					
+					- Passwordless Authentication
+		
+		Create Linux User 
+		
+		Create User Directory
+		
+		User Credentials 
+			- Password
+			
+			- SSH Keys 
+		
+		User Group - Developers - user1,2,3,4,5
+		
+		Create Linux User with SSH Keys :::
+		
+			useradd devopsadmin -s /bin/bash -m -d /home/devopsadmin
+
+			su - devopsadmin
+
+			ssh-keygen -t ecdsa -b 521										#ubuntu 22.04 or higher version of ubuntu				
+
+			cd .ssh
+			
+			ls ~/.ssh 
+
+			#You should see following two files:
+
+			#id_ecdsa - private key
+			#id_ecdsa.pub - public
+			
+			
+			cat id_ecdsa.pub > authorized_keys			# authorized_keys this file name should be same.
+			
+			authorized_keys :::
+				It is the copy of Public Key.
+				
+				Always the private key will be compared with the authorized_keys
+				
+			chmod 600 /home/devopsadmin/.ssh/*					# Used to Change the Access Mode of Files or Directories
+			
+			
+			
+			
+		Get the List of Linux Users ::::
+			cat /etc/passwd
+		
+		Get the list of Linux User Groups :::: 
+			cat /etc/group
+	
+	
+		Create Password to any Linux User:
+		
+			As a root user ::
+			
+				passwd <user_name>
+				
+		root@ip-172-31-46-175:~# passwd devopsadmin
+		New password:
+		Retype new password:
+		passwd: password updated successfully
+		
+				passwd -d <user_name>		# Delete Linux User Password
+		
+	Networking - Access the Remote Servers ::::
+	
+		1. Create 2 EC2 Instances 
+		
+		VM1(Create Key_Pair) -- share it to VM2
+	
+		AWS Cloud :
+		
+			VM1	(Server)
+			
+			VM2 (Client)
+					
+		1. Establish Connection to Remote Server  
+		2. Login to the Remote Server 
+		3. Copy the Files from one server to another server
+			using SCP			-- Deployment 
+		4. Manage the Remote Server - Install any package/Uninstall/Upgrade 
+		
+		Pre-requisites for Remote Server :::
+		
+			- Launch 2 VMs (VM1-Source & VM2-Target)
+			
+			- Ensure that Port 22 is enabled for SSH
+			
+			- Create User in both the VMs 
+			
+			- Create SSH-Key in one server(VM1)
+			
+			- Use the public_Key as a authorized_keys in the Client Machine(VM2)
+			
+			- Establish SSH Connection & Login to VM2(Client_Machine)
+			
+			- Copy Files from VM1 to VM2(Client_Machine)
+
+
+
+
+### Client Machine :::
+
+
+useradd testuser1 -s /bin/bash -m -d /home/testuser1
+
+passwd testuser1
+
+#Enter New Password:
+#Confirm Password:
+
+#Goto:
+
+vi /etc/ssh/sshd_config
+
+#Enable Password Authentication to Yes and save the file
+#Execute Below command to update the changes.
+
+service ssh reload
+
+#As a root user edit below file:
+
+$ visudo
+
+#add the below mentioned line in the file and save it.
+ 
+testuser1 ALL=(ALL) NOPASSWD: ALL
+
+su - testuser1
+
+ls -a 
+
+
+### Server Machine :::
+
+
+useradd devopsadmin -s /bin/bash -m -d /home/devopsadmin
+
+#useradd devopsadmin
+
+su - devopsadmin	
+
+#ssh-keygen -t rsa -b 1024 -m PEM
+
+#ssh-keygen -R rsa -b 1024 -m PEM
+ssh-keygen -t ecdsa -b 521										#ubuntu 22.04 or higher version of ubuntu				
+
+ls ~/.ssh 
+
+#You should see following two files:
+
+#id_ecdsa - private key
+#id_ecdsa.pub - public
+
+
+#Goto Client Machine, within testuser1 home directory, create .ssh directory
+
+vi authorized_keys
+
+#paste the id_ecdsa.pub of devopsadmin user from Server machine to authorized_keys file in Client Machine 
+
+chmod 600 /home/testuser1/.ssh/*
+
+From the Server Machine, as a devopsadmin user, Use the Private IP Address of Client Machine to Establish SSH Connection to Client Machine as a testuser1
+
+ssh testuser1@172.31.2.173			# Private IP Address of Client Machine 
+
+
+
+	- Copy Files from VM1 to VM2(Client_Machine)	
+
+		Server Machine ::::		
+			/home/devopsadmin/source_file1 
+			
+		Client Machine ::::
+			/home/adminuser1/source_file1
+	
+		#cp  /home/devopsadmin/source_file1 home/devopsadmin
+		
+		scp /home/devopsadmin/source_file1 testuser1@172.31.2.173:/home/testuser1
+
+
+Next :::
+
+	7. Process Automation
+			- Shell Scripting
+
+
 
