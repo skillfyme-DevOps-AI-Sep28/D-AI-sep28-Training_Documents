@@ -1,0 +1,386 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+8PM IST - 11PM IST - SAT & SUN (WeekEnd)
+
+Module 1 : DevOps Fundamentals --> Core DevOps Features.
+
+Introduction to DevOps :
+
+What is DevOps ?
+	
+	
+IT Services :
+
+	Software Development :
+	
+		--> Web Applications 
+		
+		--> Desktop Applications
+		
+		--> Mobile Applications
+	
+		--> Embedded Applications - Chip level programming! 
+		
+		
+	Software Development Life Cycle - SDLC :
+	
+	--> Desktop Applications :
+	
+			-> Super_Market Billing 
+				-> Functions :
+						- Inventory 
+						- Stock 
+						- Billing 
+						- User_Interface 
+						- Payment : CASH / CARD 
+				
+			
+	Various Stages of Software Development Life Cycle - SDLC Process :
+			
+	- Requirement Analysis 
+	- Design & Documentation
+	- Coding and Development 
+	- Test
+	- Implementation to Production 
+	- Monitor/Maintain the product 
+	
+	Waterfall Model ::::
+	
+		- Top-Down Approach 
+		- Linear in Fashion 
+		- Was meant for Monolith Application Architecture
+			- The Whole software product is developed and delivered as one full Application
+
+		--> Desktop Applications :
+		
+				-> Super_Market Billing 
+					-> Functions :
+							- Inventory 
+							- Stock 
+							- Billing 
+							- User_Interface 
+							- Payment : CASH / CARD 
+							
+								--> Add New UPI Paymode 
+		
+		Core_project :
+		
+		- Requirement Analysis 		--> 12 Months 
+		- Design & Documentation
+		- Coding and Development 		--> 7th of the project 
+		- Test
+		- Implementation to Production 
+		- Monitor/Maintain the product 	
+
+		Enhancement_project :	--> Add New UPI Paymode 
+		
+		- Requirement Analysis 		--> 
+		- Design & Documentation
+		- Coding and Development 		--> 
+		- Test
+		- Implementation to Production 
+		- Monitor/Maintain the product 		
+	
+	
+	AGILE Methodologies ::::
+
+		- Requirement Analysis 
+		- Design & Documentation
+		- Coding and Development 
+		- Test
+		- Implementation	
+
+
+					-> Super_Market Billing 
+						-> Functions/Modules/Iterations :
+								- Inventory 							Micro-service
+								- Stock 
+								- Billing 
+								- User_Interface 
+								- Payment : CASH / CARD 	
+		
+		Iteration 1 : Inventory Management 
+	
+		- Requirement Analysis 
+		- Design & Documentation
+		- Coding and Development 
+		- Test
+		- Implementation to production with manual/proper approval	
+	
+		Iteration 2 : Stock Management 
+	
+		- Requirement Analysis 
+		- Design & Documentation
+		- Coding and Development 
+		- Test
+		- Implementation to production with manual/proper approval	
+
+		Iteration 3 : PAYMENT - CASH/CARD Management 
+	
+		- Requirement Analysis 
+		- Design & Documentation
+		- Coding and Development 
+		- Test
+		- Implementation to production with manual/proper approval	
+
+
+		Iteration nth : --> Add New UPI Paymode 
+	
+		- Requirement Analysis 
+		- Design & Documentation
+		- Coding and Development 
+		- Test
+		- Implementation to production with manual/proper approval	
+		
+		
+		Using AGILE Methodologies;
+		
+			We can achieve :
+			
+				- Continuous Development 
+				- Continuous Integration 
+				- Continuous Testing 
+				- Continuous Delivery 
+					- It is a process of Releasing the changes to production environment with Manual Approval
+					- It always expect the Manual intervension/Approvals for Production Releases.
+				
+			We cannot achieve :
+			
+				- Continuous Deployment 
+					- It is a process of Releasing the changes to production environment without any Manual Approval
+					- It will never expect any Manual intervension/Approvals for Production Releases.		
+		
+		
+		
+	DevOps :
+	
+		DevOps is a Software Development Strategy, which helps to promote the collaboration between the teams like Development Team and Operations Team to achieve Continuous Development, Continuous Integration, Continuous Testing, Continuous Delivery, Continuous Deployment and Continuous Monitoring in more automated fashion. 
+	
+	
+	How to Implement DevOps :
+	
+	- Teams :
+	
+		DevOps Team :
+			- Infra-Structure Management Team 			Create Servers & Configure Servers - 100 server 
+			- Application Development Team 
+			- Testing Team 
+			- Release Management Team 
+			- Production Support Team 
+			- Production Monitoring Team 
+			- IT Security Team 
+			
+	
+	- Environments : 
+	
+		Non-Prod Environments																		Production Environment
+		
+			- Dev Environment
+			
+			- Build Environment
+			
+			- Testing Environments
+			
+				- QA - Quality Assurance Testing 
+				
+				- UAT - User Acceptance Testing  							==============>					Production Servers
+		
+			
+	- Application Architecture :
+	
+		- Monolith Application Architecture
+			- It is tightly coupled Application Architecture
+			- The Whole software product is developed and delivered as one full Application
+			- Only Continuous Delivery can be achieved using Monolith Application Architecture
+		
+		- Micro-Service Based Application Architecture 
+			- It is Loosly-Coupled Application Architecture
+			- Every function in the Application is considered as a Micro-Service
+			- Each Micro-Service Service can be independently developed, test and implemented.
+			- Continuous Deployment can be achieved only with help of Micro-Service Based Application Architecture
+	
+	
+	
+	DevOps Stages :::
+	
+		- Continuous Development :
+		
+			-> It is the capability of the application team to continuously develop/code the applications
+			-> Mainly used to improve the Developers' Productivity.
+			
+			Role of the Developers ::
+			
+				- Write Source Code 
+				
+				1. Create Source Code 
+				2. Manual Application Build(Process of compiling the source code and create artifacts(Binaries - *.war/*.jar/*.exec/*.dll) 
+				3. Manual Unit Testing 
+				4. Promote the changes to Test Environments 
+				5. Notify the Testing Team thru EMails 
+				
+				Using DevOps Approach :
+				
+					1. Create Source Code 
+					2. Save/Commit the Source Code to a Source Code Repository(GITHUB Repository)
+				
+				Using DevOps Strategies and Tools, Automate :
+				
+					1. Application Build(Process of compiling the source code and create artifacts(Binaries - *.war/*.jar/*.exec/*.dll)) 
+					2. Unit Testing 
+					3. Promote the changes to Test Environments 
+					4. Notify the Testing Team thru EMails 
+
+			Tools :
+			
+				Eclipse based IDEs(Integrated Development Environment) - Eclipse, Pycharm, Visual Studio, Visual Studio Code 
+				GIT,GITHUB,Sonarlint
+				Build Tools : Maven / Gradle 
+				
+		
+		- Continuous Integration :::
+		
+			-> It is the capability of the application team to continuously integrate the changes to test environments for further testing
+			
+					1. Application Build(Process of compiling the source code and create artifacts(Binaries - *.war/*.jar/*.exec/*.dll)) 
+					2. Unit Testing 
+					3. Promote the changes to Test Environments 
+					4. Notify the Testing Team thru EMails 
+					
+			Tools :
+			
+				Eclipse based IDEs(Integrated Development Environment) - Eclipse, Pycharm, Visual Studio, Visual Studio Code 
+				GIT,GITHUB
+				Build Tools : Maven / Gradle
+				Jenkins,Docker,Kubernetes 				
+		
+		
+		- Continuous Testing :::
+		
+			-> It is the capability of the testing team to continuously test the changes
+			
+			Tools :
+			
+				TestNG, Selenium, Jenkins 
+				
+				
+		- Continuous Delivery/Deployment :::
+
+			- Continuous Delivery 
+				- It is a process of Releasing the changes to production environment with Manual Approval
+				- It always expect the Manual intervension/Approvals for Production Releases.
+				- Might have Application Service Downtime.
+				
+					Eg.: 
+			
+						Banking Services : Online Banking
+						
+							- Production Release Window --> 4Hrs to 6Hrs. - Non-Business 
+								- First, try to fix the issue 								
+								- Revert the changes 
+					
+			- Continuous Deployment 
+				- It is a process of Releasing the changes to production environment without any Manual Approval
+				- It will never expect any Manual intervension/Approvals for Production Releases.
+				- Continuous Deployment can be achieved only with help of Micro-Service Based Application Architecture
+				- Each Micro-Service Service can be independently developed, test and implemented.
+				- Production Release can be achieved without any downtime. i.e., ZERO Downtime. 
+				Eg.: 
+				
+				Netflix/Facebook/www.amazon.com 
+				
+			www.amazon.com
+
+			sign-up 	- Micro-service1 -> Developer1 - Code, perform unit testing, promote the change for further testing(QA/UAT), Release to prod
+			sign-in 	- Micro-service2 -> Developer2 - Code, perform unit testing, promote the change for further testing(QA/UAT), Release to prod
+			search 
+			add to cart 
+			place order 
+			payment 
+			confirm order
+			trace the order 
+			
+			Tools :
+			
+				Jenkins, Docker, Kubernetes, Ansible 
+
+					
+		- Continuous Monitoring :::
+		
+			- Completely Owned by Production Monitoring Team - 24/7 Support 
+		
+			www.amazon.com
+			
+			Infra-Structure :
+			
+				--> Continuously Monitor CPU/Memory/Network Utilization of the Servers 
+				
+			
+			Tools :
+			
+				- Prometheus/Grafana/Nagios/Splunk/Dynatrace  - Alert Managers 
+				- Jenkins 
+			
+		
+	Infra-Structure Management Team :
+		
+		- Infra-Structure Provisioning/Creation 
+		
+		- Configuration of Servers 
+		
+			--> IAC Tools --> Infra-Structure As Code 	- Declarative Scripts using yaml/json formats
+			
+				Provisioning/Creation 		==> Terraform/Cloudformation/ARM 
+				
+				Configuration Management 	==> Ansible/puppet/Chef 
+				
+				Automate the Infra-Structure Provisioning and Configurations using Jenkins/Argo-CD 
+				
+				
+	
+	IT Security Team :
+	
+		Evolution of SDLC Process :
+		
+			Waterfall,Agile,DevOps,DevSecOps,GITOps,AIOps,MLOps,...
+		
+			Shift-Left Approach
+			
+			
+			Dev Environment --> Build --> QA --> UAT ---> Prod 
+		
+		
+		- Static Code Analyzer - SonarQube Server /Cloud - Used to ensure code quality and zero vulnerabilities in the code.
+		
+		- Dynamic Code Analyzer - HP Fortify/Checkmarx
+		
+		
+	
+	DevOps LifeCycle :
+	
+		Developer Create the Source Code 
+		
+		Build 
+		
+		Testing 
+		
+		Deploy to Prod 
+		
+		Monitor 
+	
+	
+	DevOps is all about Continuous Improvement.
+	
+	
+	DevOps is based on :
+	
+		- People 
+		
+		- Process/Strategies
+		
+		- Tools 
+	
+	
+	
+Next :
+
+Version Control System using GIT/GITHUB :
