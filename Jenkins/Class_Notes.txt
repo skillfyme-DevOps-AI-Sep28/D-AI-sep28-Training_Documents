@@ -1,0 +1,112 @@
+#########################
+Day - 4 | 27th Oct. 2024
+#########################
+Module 1 :
+
+CICD -> 
+
+	Build Orchestration Tool :::: 
+	
+	Jenkins :
+	
+	gitlab-ci 
+	
+	azure pipeline 
+	
+	aws code pipeline 
+	
+	bamboo 
+	
+	github action - cicd pipelines
+	
+	
+Build Orchestration Tool :::: 
+
+	Continuous Development :
+	
+				Using DevOps Approach :
+				
+					1. Create Source Code 
+					2. Save/Commit the Source Code to a Source Code Repository(GITHUB Repository)
+				
+				Using DevOps Strategies and Tools, Automate :
+				
+					1. Application Build(Process of compiling the source code and create artifacts(Binaries - *.war/*.jar/*.exec/*.dll)) 
+					2. Unit Testing 
+					3. Promote the changes to Test Environments 
+					4. Notify the Testing Team thru EMails 
+					
+					
+	Jenkins :
+	
+		- Is a Open-Source Build Orchestration Tool 
+		
+		- It is based on Master-Slave Architecture
+		
+		
+	- Jenkins Master-Slave Architecture 
+	
+		- Jenkins_Master (VM) 			# Is to create the CICD Pipeline Projects and schedule the project to run the slave nodes.
+			Jenkins_SlaveNode1(VM)		# Build Java Applications
+			Jenkins_SlaveNode2(VM)		# Build Python Applications
+			Jenkins_SlaveNode3(VM)		# Build .Net Applications
+			Jenkins_SlaveNode4(VM)		# Build Angular/NodeJS Applications
+			Jenkins_SlaveNode5(VM)		# Build Ruby Applications
+			
+	
+	
+	- Why Master_Slave Architecture 
+	
+	- Install and Configure Jenkins 
+	
+	
+	Java-Web-Application Project --> Maven Springboot framework 
+	
+		Build the application 
+		
+			build tool - maven 
+			git 
+			
+	- Environments : 
+	
+		Non-Prod Environments																		Production Environment
+		
+			- Dev Environment	(Developer)
+			
+			- Build Environment - to perform build & create artifacts
+			
+			- Testing Environments
+			
+				- QA - Quality Assurance Testing 
+				
+				- UAT - User Acceptance Testing  							==============>					Production Servers
+	
+
+Working with Jenkins:
+
+	Developers' Perspective :
+			- Developers are just the consumers. 
+	
+	DevOps Perspective :
+	
+	DevOps Team is the Owner of Jenkins Servers.
+	
+	Administrators :
+	
+	Roles and Responsibilities :
+	
+		- Installation and Configuration of Jenkins
+		- Plugins Management 
+		- Tools Management 
+		- User Management 
+		- Jenkins Security Management 
+		- Global System Configurations 
+		- Credentials Management
+		- Jenkins_Master and Slave_Node Configurations 
+		- Create CICD Pipeline Projects based on Application Teams' Requirements
+		- Onboard the Applications to CICD Process.
+		- Troubleshoot the issues 
+		- Backup-Recovery 
+		- Periodic Upgrade of Jenkins and the Plugins. 
+		
+		
