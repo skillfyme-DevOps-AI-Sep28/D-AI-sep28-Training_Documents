@@ -1236,5 +1236,151 @@ Next ::
 
 
 
+#########################
+Day - 4 | 27th Oct. 2024
+#########################
+
+	
+	GIT Stash
+	
+	Handle the Remote Repository - github
+	
+	Real-Time Scenarios using git/github
+		- gitlab 
+		- Azure Repos 
+		- AWS Code Commit 
+		- Bitbucket 
+	
+	Roles and Responsibilities of DevOps 
+	
+	CICD Implementations 
+	
+	
+
+	GIT Stash :::
+		
+		- Is used to save the uncommitted changes to a temporary area.
+		- git stash is type of List Data Structure 
+		
+		Repo1:
+		
+			master : cm1,cm2 
+			
+				feature1 : cm1,cm2,
+					created a sample.java 
+					git add .
+					
+				git status 
+				
+				git switch adhoc-branch 
+					
+
+		git stash save "save_Message"    # Create an entry in the stash list 
+		                                 
+		git stash list                   # Get the list of item from the stash list 
+		                                 
+		git stash apply                  # Apply/Copy the Latest entry from stash list back to staging area 
+		git stash apply stash@{1}        # Apply/Copy a specific entry from stash list back to staging area 
+		                                 
+		git stash pop 		             # move the Latest entry from stash list back to staging area 
+		git stash pop stash@{1}          # move a specific entry from stash list back to staging area 
+		                                 
+		git stash drop                   # Delete the Latest entry from stash list
+		git stash drop stash@{3}         # Delete a specific  entry from stash list
+		                                 
+		 git stash clear                 # Clean-up / Delete all the entries from stash list
+		
+
+
+	Handle the Remote Repository - github :
+
+
+	Local Machine:																					Remote Server
+	
+	Working Directory				Staging Area					Local Repository					Remote Repository 
+	
+	index.html	 	  ------------>	index.html		------------>	index.html:v1.0		----------->		index.html:v1.0	
+						git add                      git commit 						  git push
+	
+	
+	Developers's Workload :::
+	
+		Enhancement_project / Bug_fixing 
+		
+		New Product 
+		
+		
+		
+		git clone 		# To Copy/Clone the Entire Remote Repository to Local Machine 
+		
+		git add			# To Add the Changes from the Working Directory to Staging Area 
+		
+		git commit 		# To Commit the Changed from Staging Area to Local Repository 
+		
+		git push 		# To Push the Changes from Local Repository to Remote Repository 
+		
+		git pull/fetch :
+		
+			git fetch	
+				# It is just used to check for the incremental changes from remote repository. If there is any incremental changes exist, it will update the details in the local repository and Not in the working directory. So, in order to work on the incremental changes, we need to perform explicit merge / pull. 
+
+			git pull	
+				# It is used to check for the incremental changes from remote repository. If there is any incremental changes exist, it will update the details in the local repository as well as in the working directory.
+
+					git pull = git fetch + git merge 
+					
+					
+		git init 		# To Initialize a git repository in Local Machine.
+						# Create .GIT Directory 
+						# Create a default Branch - master/main Branch 
+
+
+
+
+	Enhancement_project / Bug_fixing :::
+		- Source Code Repository will be already present in the remote git server 
+		
+		
+		github -> Remote Repository
+
+
+		Create Remote github repository 		-->  GUI 
+		
+		
+		Pull Request ==> 	Will be created by the developers and assign to the Reviewer/Approver 
+		
+		
+		git push -u origin local-feature1 
+		
+		
+		Create the github access token 
+		
+			- goto account level settting -> Developer settings --> Personal Access Token
+			- create access token 
+
+				gsdfsadfasdfasdfsdfS
+
+
+		git remote -v		# used to get the list of remote repositories that are linked to the local repository
+		
+		git remote remove origin	# Detach the remote repository
+		
+		git remote add origin https://github.com/skillfyme-DevOps-AI-Sep28/Testrepo1.git
+		
+		
+	Real-Time Environments 
+	
+		Visual Studio Code 
+			- Install Visual Studio Code in Local Machine.
+				https://code.visualstudio.com/download
+				
+				
+		github 
+		
+		gitlab / Azure Repo 
+		
+		AWS Code Commit 
+
+
 
 
