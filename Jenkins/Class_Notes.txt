@@ -110,3 +110,259 @@ Working with Jenkins:
 		- Periodic Upgrade of Jenkins and the Plugins. 
 		
 		
+		
+#########################
+Day - 5 | 2nd Nov. 2024
+#########################
+
+	Working with Jenkins!
+	
+	- Installation and Configuration of Jenkins
+			https://www.jenkins.io/doc/book/installing/
+	
+	
+		AWS EC2 Instance : Ubuntu - 22.04v AMI 
+		
+		Purpose :
+		
+		- Jenkins_Master (VM) 			# Is to create the CICD Pipeline Projects and schedule the project to run the slave nodes.
+			Jenkins_SlaveNode1(VM)		# Build Java Applications
+
+		Tools :
+		
+		- Jenkins_Master (VM) 			# git,jdk,jenkins
+	
+
+		- Plugins Management 
+		
+		
+		- Tools Management 
+		
+		
+		- User Management 
+		
+		
+		- Jenkins Security Management 
+			
+				- User Authentication	- Jenkin's Own user database
+				
+				- User Authorization	- Jenkins Security Realm
+		
+		
+		- Global System Configurations 
+		
+		
+		- Credentials Management
+
+
+
+	- Create Jenkins Projects/Jobs on Jenkins Master Node.
+	
+		--> Free-Style Projects/Jobs
+	
+		--> Pipeline Projects
+				- Based on Groovy Scripts 
+				- It compose of various Stages
+	
+			Variables :::
+			
+				- Environment Variables
+				
+						echo "jenkins-${JOB_NAME}-${BUILD_NUMBER}"
+			
+						echo "Jenkins"
+						
+						"${variable_name}"
+			
+				- User Defined Variables 
+				
+						
+
+		--> Pipeline Projects
+				- Based on Groovy Scripts 
+				- It compose of various Stages
+				
+				
+				- Scripted Pipelines 
+				
+				
+				- Declarative Pipelines 	# 	Recommended
+					- Snippet Generator
+				
+				
+pipeline {
+    agent any
+
+    stages {
+        stage('Hello1') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('Hello2') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('Hello3') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+    }
+}			
+
+
+Pipeline Stages :::
+
+		CI/CD 
+
+pipeline {
+    agent any
+
+    stages {
+        stage('SCM Checkout') {
+            steps {
+                echo 'Perform SCM Checkout'
+				echo 'Perform SCM Checkout1'
+            }
+        }
+        stage('Application Build') {
+            steps {
+                echo 'Application Build'
+				
+            }
+        }
+        stage('Deploy to QA Environment') {
+            steps {
+                echo 'Deploy to QA Environment'
+            }
+        }
+    }
+}
+
+	- Jenkins_Master and Slave_Node Configurations :::::
+	
+		Purpose :
+		
+		- Jenkins_Master (VM) 			# Is to create the CICD Pipeline Projects and schedule the project to run the slave nodes.
+			Jenkins_SlaveNode1(VM)		# Build Java Applications
+
+		Tools :
+		
+		- Jenkins_Master (VM) 			# git,jdk,jenkins
+			Jenkins_SlaveNode1(VM)		# git,jdk,maven
+			
+			
+	
+	Build Tools :
+	
+		Maven is Java application Tool :
+
+		Maven Build Tool :::
+		
+			- Is a Java Application Build Tool, used to compile the Java application source code, Perform Unit Testing, Create Artifacts. 
+
+		How to Perform Application Build, Unit Testing ?
+		
+			- Using Maven Build Tool 
+				- Maven is Java Application Build Tool
+				- Maven is used to Compile the Source Code 
+				- Create Artifacts 
+				- Perform Unit Testing
+					(Unit Testing is a process of testing the changes done by the developers)
+					
+		Maven Project :
+		
+			POM.xml File 	==> Project Object Model.
+			
+			Maven Goals 	==> Objective 
+
+		Application Build Process :
+		
+			Input 	: Source Code 	-	*.java  (github repositories)
+			
+			Output 	: Artifacts 	- 	*.war 	(Artifactory Libraries)
+			
+		Maven - Build Tool
+		
+		How Maven Works ??
+		
+		
+		Application Source Code Repository :
+		
+			Developer create POM.XML File to perform Maven Build
+								
+		Build Tools - Maven - used to build Java applications 
+		
+		Using Maven : 
+			Application Build - Compile the code, create artifacts, perform unit-testing 
+
+				- Build  - It is a process of compiling the source code and create artifacts(Binaries - *.war / *.jar/ *.exec) 
+				- Unit Testing
+	
+		Maven Project :
+		
+			pom.xml - Project Object Model :
+			
+				- Will be part of the Java Application Project - Source Code Repository
+				- It is used to define the properties of application artifacts 
+				- It is used to define dependencies and the plugins required to perform build/unit-testing
+
+	
+			Maven Repository :		https://mvnrepository.com/
+			
+				- Maven Repositories Contains the Maven Dependencies and Plugins 
+				- During Build, Maven refer to this Repositories and Download the Dependencies to perform Application Build, Unit Testing etc...
+				
+				Eg.: 
+				Build Environment (VM) :::
+
+					Build the application	--> Jdk, Maven 
+					
+					Unit Testing - Junit Testing Tool 
+	
+	
+			Maven Goals : 
+				This defines the actions we perform using Maven 
+			
+				● mvn compile 	- to compile the source code
+				● mvn test 		- to compile and execute junit test cases
+				● mvn package 	- to compile, test and create artifacts in the target folder of Project Library
+				● mvn clean 	- to clean the target folder.
+
+				Eg.: 
+				
+				mvn clean package 
+
+			Java Web Application Project : - 
+
+			My_Web_App - Folder 
+			
+			Maven Project Structure :::			# Java Maven Desktop/Console/terminal Application;
+
+			MVN_Project1				# Project Name 
+				src 
+					main			# Maintain the source code *.java - Business Logic 
+						*.java
+					test			# Maintain the Test Cases and Test Data - JUnit 
+						*.java
+				target
+					artifacts *.war / *.jar
+				pom.xml 			==> defines the application artifacts, plugins and all the required depedencies
+
+				JRE_Libraries
+				MVN_Libraries		
+		
+		
+https://github.com/skillfyme-DevOps-AI-Sep28/java-mvn-springbapp
+
+
+Next :
+
+		- Jenkins_Master and Slave_Node Configurations 
+		- Create CICD Pipeline Projects based on Application Teams' Requirements
+		- Onboard the Applications to CICD Process.
+		- Troubleshoot the issues 
+		- Backup-Recovery 
+		- Periodic Upgrade of Jenkins and the Plugins. 
