@@ -358,6 +358,249 @@ pipeline {
 https://github.com/skillfyme-DevOps-AI-Sep28/java-mvn-springbapp
 
 
+
+		
+#########################
+Day - 6 | 3rd Nov. 2024
+#########################
+
+
+	- Jenkins_Master and Slave_Node Configurations 
+	
+	- Jenkins_Master and Slave_Node Configurations :::::
+	
+		Purpose :
+		
+		- Jenkins_Master (VM) 			# Is to create the CICD Pipeline Projects and schedule the project to run the slave nodes.
+			Jenkins_SlaveNode1(VM)		# Build Java Applications
+
+		Tools :
+		
+		- Jenkins_Master (VM) 			# git,jdk,jenkins
+			Jenkins_SlaveNode1(VM)		# git,jdk,maven
+			
+		
+		SSH Connection to remote server :
+		
+			- HostName
+			- UserName
+			- User_Credential
+				- Key-Based Authentication (SSH Keys)
+					- Public/Private Key
+			
+		
+pipeline {
+    
+    agent { label 'slave1' }
+
+    stages {
+        stage('SCM Checkout') {
+            steps {
+                echo 'Perform SCM Checkout'
+				git 'https://github.com/skillfyme-DevOps-AI-Sep28/java-mvn-springbapp.git'
+            }
+        }
+        stage('Application Build') {
+            steps {
+                echo 'Application Build'
+                sh 'mvn clean package'
+                
+            }
+        }
+        stage('Deploy to QA Environment') {
+            steps {
+                echo 'Deploy to QA Environment'
+            }
+        }
+    }
+}
+
+
+	- Environments : 
+	
+		Non-Prod Environments																		Production Environment
+		
+			- Dev Environment	(Developer)
+			
+			- Build Environment - (Jenkins_SlaveNode1) to perform build & create artifacts
+			
+			- Testing Environments
+			
+				- QA - Quality Assurance Testing 
+				
+				- UAT - User Acceptance Testing  							==============>					Production Servers
+
+
+	Target Environments :
+	
+		Target Server - Web Application Server to host the application
+		
+		VM1 - WAS => Tomcat / Nginx / httpd 
+		
+		
+	- Jenkins_Master and Slave_Node Configurations :::::
+	
+		Purpose :
+		
+		- Jenkins_Master (VM) 			# Is to create the CICD Pipeline Projects and schedule the project to run the slave nodes.
+			Jenkins_SlaveNode1(VM)		# Build Java Applications
+		
+		- Tomcat Web Application Server (VM) 	# To execute the Artifacts created in the Build Environment
+		
+
+		Tools :
+		
+		- Jenkins_Master (VM) 					# git,jdk,jenkins
+			Jenkins_SlaveNode1(VM)				# git,jdk,maven
+		- Tomcat Web Application Server (VM) 	# jdk,tomcat(port 8080) - QA 
+
+
+	Application Deployment :::			# Process of Copying the artifacts from one server to another.
+
+
+	Source Server 													Target Server 
+	
+		Jenkins_SlaveNode1												Tomcat_Server 
+		
+	Source Path 													Target Path 
+	
+		*/target/mywebapp.war 											opt/tomcat/webapps
+		
+		
+	Upon Deployment :::	
+	
+		*/target/mywebapp.war 											opt/tomcat/webapps/*.war	
+	
+	
+	
+
+	Integrate Tomcat Server in Jenkins Master :::::
+	
+	Using Publish Over SSH Plugins !
+	
+	
+sshPublisher(publishers: [sshPublisherDesc(configName: 'SK_AI-D-Tomcat_Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: 'target/', sourceFiles: 'target/*.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+
+
+
+pipeline {
+    
+    agent { label 'slave1' }
+
+    stages {
+        stage('SCM Checkout') {
+            steps {
+                echo 'Perform SCM Checkout'
+				git 'https://github.com/skillfyme-DevOps-AI-Sep28/java-mvn-springbapp.git'
+            }
+        }
+        stage('Application Build') {
+            steps {
+                echo 'Application Build'
+                sh 'mvn clean package'
+                
+            }
+        }
+        stage('Deploy to QA Environment') {
+            steps {
+                script{
+                    sshPublisher(publishers: [sshPublisherDesc(configName: 'SK_AI-D-Tomcat_Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: 'target/', sourceFiles: 'target/*.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                }
+            }
+        }
+    }
+}
+
+
+Build Triggers ::: # Automate the Jenkins Jobs Scheduling!
+	
+	
+	Build Periodic :
+		- Based on the crontab.
+		- Schedule the jenkins job to run based on crontab definitions 
+		- It is applicable for any jenkins job for process automation 
+		
+		Non-Prod 								Prod-Environments 
+		
+			Servers(Business Hours)					Servers (24/7)
+	
+				8AM - 10PM 
+				
+			dev  100+  
+			test 100+ 
+	
+	
+	Github Webhook :
+	
+		- To Achieve CI/CD 
+		
+		- It is based on the source code changes.
+		
+		- As soon as the source code repo is updated, github webhook will trigger the Jenkins build Project 
+		
+		- Use Jenkins URL - github-webhook tag in the repo.
+		
+		
+		http://65.0.127.103:8080/github-webhook/			# Add the url in github repo setting - webhook configuration
+		
+		<Jenkins-Server-external-url>:8080/github-webhook/
+	
+	
+	PollSCM :::
+	
+		- Used to Schedule the jenkins job to run based on crontab definitions, only if there is any commit happened in the source code repository 
+		
+		Eg.: 
+		
+		Test Cycle ::
+		
+			8AM	- 12PM - 3PM  		=> QA Testing 
+			
+			
+
+Jenkins Email Notification :::
+
+	--> Based on the Jenkins Job Status we can send the email notifications.
+	
+	As a post build action we can config the Email Notifications:
+	
+		-> Success 
+		-> Failure
+		-> Unstable 
+
+
+GMail Server :::
+	
+To Setup the Email Notifications, First we need to set the Email Server in the Jenkins System configuration :
+
+
+How to setup the Email Server in the Jenkins Config:
+
+goto manage jenkins -> system configuration 
+
+goto Email Notification 
+		
+SMTP Server :
+smtp.gmail.com
+
+SMTP Authentication
+
+SMTP Port :: 465
+
+Login to Gmail :::
+
+Click Manage Account Settings
+
+@Left side panel - select Security 
+
+MFA --> mobile#
+
+App Password = 16 bytes of App Password. vaufgdfgdlltzr v
+
+What ? window
+Which Appln - email	
+
+
 Next :
 
 		- Jenkins_Master and Slave_Node Configurations 
