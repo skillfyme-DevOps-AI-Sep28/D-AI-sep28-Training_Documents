@@ -217,6 +217,68 @@ Containerization using Docker :::
 		
 			Eg.: docker logs 5aaafa0c36bb	
 
+    2  apt install docker.io -y
+    3  docker --version
+    4* cle
+    5  docker images
+    6  docker ps
+    7  docker ps -a
+    8  clear
+    9  clear
+   10  docker images
+   11  docker ps -a
+   12  docker pull centos
+   13  docker images
+   14  docker ps -a
+   15  docker run centos
+   16  docker ps
+   17  docker ps -a
+   18  docker run centos sleep 20
+   19  asdf
+   20  docker run -d centos sleep 20
+   21  docker ps
+   22  docker run -d centos sleep 20
+   23  docker ps
+   24  clear
+   25  docker ps -a
+   26  docker run -it centos bash
+   27  docker images
+   28  docker run -it ubuntu bash
+   29  docker run -it centos bash
+   30  docker ps
+   31  docker ps -a
+   32  docker start 6fbd28348ad0
+   33  docker ps
+   34  git --version
+   35  clear
+   36  docker ps
+   37  docker exec -it 6fbd28348ad0 bash
+   38  docker ps
+   39  docker stop 6fbd28348ad0
+   40  docker ps
+   41  docker ps -a
+   42  docker images
+   43  docker rm 853ce5fdb53b
+   44  docker ps -a
+   45  docker rm 87c30a14bd6b 9cfa7bf633ac 3d0d337cbf6b a8cf2a451760
+   46  docker ps -a
+   47  docker rmi centos
+   48  docker rm 55bf8b48cde5 03b946c90828
+   49  docker ps -a
+   50  docker rmi centos
+   51  docker images
+   52  clear
+   53  docker images
+   54  docker run -it tomcat:8.0 bash
+   55  docker run tomcat:8.0
+   56  clear
+   57  docker run -it -p 8088:8080 tomcat:8.0
+   58  clear
+   59  docker ps
+   60  docker stop 5aaafa0c36bb
+   61  docker ps
+   62  clear
+   63  history
 
 Next :::
 			
