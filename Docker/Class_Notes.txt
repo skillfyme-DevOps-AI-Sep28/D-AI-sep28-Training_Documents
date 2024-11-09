@@ -1,0 +1,240 @@
+	
+#########################
+Day - 7 | 9th Nov. 2024
+#########################
+
+
+
+	CI/CD --> Jenkins 
+	
+	gitlab-ci 
+	
+	github actions 
+	
+	Azure Pipelines 
+	
+	AWS Code Pipelines 
+	
+	
+	
+	
+	
+	Containerization using Docker :::
+	
+	Kubernetes Container Orchestration Tool :::
+	
+
+
+Containerization using Docker :::	
+
+	--> Containerization :::
+	
+			- It is a process of packaging the Application along with it's dependencies.
+			- Mainly used to deploy Micro-Service Based Applications
+	
+	
+	Virtual Machines ::
+	
+		- VMs are considered as Hardware Level Virtualization.
+		- VMs are created using Hypervisor
+		- VMs are used to run the Operating System.
+		- VM will continue to run even if there is no Active Application/Task
+		- VMs Consume more CPU/Memory, and Consume more time to start-up 
+	
+	Containers ::
+	
+		- Containers are considered as OS Level Virtualization.
+		- Containers are created using Container Engine 
+		- Containers are used to run the Application/Task. Not Operating System 
+		- If the Application/Task completed or if there is no Application/Task to execute, the Containers will immediately got to exit state.
+		- Containers will Start the Application/Task faster when compared to VMs 
+		- Containers Consume less CPU/Memory, and Consume more time to start-up	
+		
+		- Using Containers we can reduce the no. of VMs.
+			-> Kernel 
+				-> Namespace 
+				-> Control Group 
+			
+	--> Containerization :::
+	
+			- It is a process of packaging the Application along with it's dependencies.
+
+
+	Use Cases ::
+	
+		Infra-Structure Perspective :
+		
+			- Jenkins Master-Slave Architecture 
+			
+				- Jenkins_Master (VM) 			# Is to create the CICD Pipeline Projects and schedule the project to run the slave nodes.
+					Jenkins_SlaveNode1(VM)		# Build Java Applications
+					Jenkins_SlaveNode2(VM)		# Build Python Applications
+					Jenkins_SlaveNode3(VM)		# Build .Net Applications
+					Jenkins_SlaveNode4(VM)		# Build Angular/NodeJS Applications
+					Jenkins_SlaveNode5(VM)		# Build Ruby Applications
+					
+				- Jenkins_Master (VM)
+					Jenkins_SlaveNode1(VM)
+						- Container Engine 
+							C1 					# Build Java Applications
+							C2                  # Build Python Applications
+							C3                  # Build .Net Applications
+							C4                  # Build Angular/NodeJS Applications
+							C5                  # Build Ruby Applications
+						
+				Using Containers we can reduce the no. of VMs.
+				
+				
+		
+		Development/Deployment Perspective :
+
+
+	--> Containerization :::
+	
+			- It is a process of packaging the Application along with it's dependencies.
+
+			Developer:
+			
+				- Create Source Code 
+				- Build - Create Artifacts --> mywebapp.war_v1.0 (Application Artifact)
+					- Unit Testing --> 
+						Tomcat WAS 	--> jdk17,tomcat8.5 to run mywebapp.war_v1.0 
+						
+						Package - (mywebapp.war_v1.0,jdk17,tomcat8.5)	--> mywebapp_Img:v1.0 (Application Image)
+						
+						Deploy the Application Image to Target Environment through Container Registries.
+					
+				- Deploy to Target Environment(QA)
+				
+				- QA Environment - mywebapp.war_v1.0 			# mywebapp_Img:v1.0(mywebapp.war_v1.0,jdk17,tomcat8.5)
+						C1 - mywebapp_Img
+					
+				
+				- UAT Environment - mywebapp.war_v1.0			# mywebapp_Img:v1.0(mywebapp.war_v1.0,jdk17,tomcat8.5)
+						C1 - mywebapp_Img
+							
+				- PROD Environment - mywebapp.war_v1.0			# mywebapp_Img:v1.0(mywebapp.war_v1.0,jdk17,tomcat8.5)
+						C1 - mywebapp_Img
+		
+		
+
+	
+	Terminologies ::
+		
+		- Container Engine : 		# Used to Create and Manage Container Images and Containers
+									# Docker Container Engine 
+			
+		
+		- Container Image :	 		# Is a static file that defines the properties and dependencies of the Application	
+									# Container Images are Non-Executable 
+									# It Composed of various layers
+									# These layers are create using Dockerfile Instructions
+		
+		- Container :		 		# Containers are the executable units of Container Image.
+		
+		- Container Registry : 		# It used to Manage/Version Control the Container Images.
+									# DockerHub 
+		
+		- Container Repositories :	# These are the sub-set of Container Registry.
+		
+		
+	
+	Working with Containerization ::::
+	
+	
+		- Install Container Engine.
+			- Docker.
+			
+			$ apt install docker.io 	# Install in a AWS EC2 Instance. Jenkins_SlaveNode1(VM)
+			
+		- Docker CLI Commands.
+		
+		docker --version 
+		
+		docker images 			# To get the list container images present in the local machine 
+
+		docker ps 				# To get the list of Active Containers 
+		
+		docker ps -a 			# To get the list of all Active Containers as well the containers in exit state. 
+		
+		Container Registry		# DockerHub - Create an Account.
+										https://hub.docker.com/
+										
+										
+		docker pull 			# To Download the Container Image from Container Registry to Local Machine.
+		
+			Eg.: docker pull <image_name>:<tag>
+			
+					docker pull centos 
+					
+		
+		docker run <Image_Name>	# To create a Container		
+		
+			Three Mode of Container Execution ::
+		
+				- Foreground/Attached Mode 			# Default
+				
+					- docker run centos 
+				
+				- Background/Detached Mode 
+				
+					- docker run -d centos 
+					
+				- Interactive Mode 
+				
+					- docker run -it centos bash
+		
+	
+		docker start <container_id>		# To Start a Container	
+
+		docker exec -it <container_id> bash # To Login to the running Container.
+		
+		docker stop <container_id>		# To Stop a Container	
+		
+		docker rm <Container_id>		# To Remove Container 
+		
+		docker rmi <Image_id>			# To Remove Container Image  
+		
+		docker rmi -f <Image_id>		# To Remove Container Image forcefully  
+		
+		
+		Container Port Mapping / Binding :::
+		
+		
+			docker run -it -p 8089:8080 tomcat:8.0 
+			
+			Port Mapping :
+			
+				-p <host_port>:<container_port>
+				
+				
+			VM1
+				Tomcat C1	- 8088
+				Tomcat C2   - 8089
+				
+		
+		docker logs <contianer_id>		# To get the container logs
+		
+			Eg.: docker logs 5aaafa0c36bb	
+
+
+Next :::
+			
+		Create Docker Container Images :
+
+			- Docker Commit 
+			
+			- Docker Build 
+			
+		Push the Container Images to Container Registry.
+		
+		
+		Docker Volumes ::
+		
+		Docker Compose ::
+		
+		About Container Orchestration :
+			
+			- Docker Swarm 		
+		
+			- Kubernetes 
