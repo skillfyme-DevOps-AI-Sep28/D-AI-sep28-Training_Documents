@@ -300,3 +300,225 @@ Next :::
 			- Docker Swarm 		
 		
 			- Kubernetes 
+
+
+			
+
+#########################
+Day - 8 | 10th Nov. 2024
+#########################
+
+	Docker Volumes :::
+		
+		Micro-service / Monolith / 3-tier / 2-tier Architecture 
+		
+		
+		Stateless Application
+		
+			- Application that will not have any trace of execution 
+		
+		
+		
+		Stateful Application
+		
+		
+		3 - Tier Application Architecture :
+		
+		Front-End Layer 	# User Interface 	==> 
+		
+		Application Layer	# Business Logic 
+		
+		Back-End Layer		# DataBase 
+		
+		
+		Persistant Volumes! 
+		
+		
+		docker volume list
+		
+		docker volume create sk-vol1
+		
+		docker volume inspect sk-vol1
+		
+		docker run -it --mount source=sk-vol1,destination=/sk-vol1 ubuntu bash
+		
+	Create Container Images :::
+	
+
+		- Docker Commit ::
+		
+			- Is used to create a container image based on the existing container reference.
+			
+			Syntax :
+				
+				docker commit <container_id> <Repository_Name>/<new_Image_Name>:<tag>
+				
+			Eg.: 	
+				docker commit ee59ae17f511 loksaieta/skmvnbuildimg:v1.0 
+				
+			docker run -it loksaieta/skmvnbuildimg:v1.0 bash
+		
+			
+		
+		- Docker Build ::
+			
+			- Is used to create a container images based on the Dockerfile definitions.
+			
+			- Dockerfile will be created by the application developers and maintained in the application source code repository.	
+			
+			
+			Syntax :
+			
+				- docker build -t <Repository_Name>/<new_Image_Name>:<tag> .				# '.' refers the Dockerfile loc
+				
+			Eg.: 
+
+				- docker build -t loksaieta/sk-gitmvnimg .
+				
+			
+			- Create Dockerfile ::
+			
+				- Dockerfile composed of various Instructions
+				- These Instructions are used to create the Layers of Container Image
+				
+				
+				FROM 	# To Identify the Base Image 
+				
+				RUN 	# To Execute any package Manager/Task 
+				
+				COPY 	# To Copy the Files from Host Volume to the Container Volume 
+				
+				CP 		# To Copy the Files within the Container Volumes 
+				
+				ADD		# To Copy the Files from Host Volume as well as from Web URL to the Container Volume  
+				
+				EXPOSE	# To set the default container port
+				
+				WORKDIR # To set the current working directory
+				
+				ENV		# To set the Environment Variabe/path
+				
+				CMD		# To set the start-up task or pass the run-time input command/task to container 
+				
+				ENTRYPOINT # To set the start-up task of the container, We cannot change the task at run time.
+					
+		
+		
+			vi Dockerfile 
+			
+				FROM ubuntu 
+				RUN apt update -y 
+				RUN apt install git -y 
+				RUN apt install maven -y 
+				
+				
+			Create Tomcat Server ?
+			
+			
+			*.war !
+			
+			
+			usermod -aG docker devopsadmin 
+			
+			
+			Craete Dockerfile :
+			
+			
+			vi Dockerfile 
+			
+				FROM tomcat:8.0				
+				COPY target/*.war /usr/local/tomcat/webapps
+				EXPOSE 8080
+				
+			
+			docker build -t loksaieta/sk-gitmvnimg .
+			
+			
+			
+	Push the Container Images to the Container Registry :
+	
+		DockerHub :
+		
+			Dockerhub Access Token. 
+			
+		Login to Container Registry using Docker CLI:
+
+			docker login -u loksaieta
+			
+		prompt for password : 
+		
+			doVg
+			
+			
+		docker push loksaieta/sk-gitmvnimg 
+		
+		
+		docker push loksaieta/skmvnapp1:v1.0
+		
+		
+		
+	Container Orchestration Tool :
+	
+
+	
+		
+		3 - Tier Application Architecture : - Micro-Service1 
+			
+			Front-End Layer 	# User Interface 	C1 
+			
+			Application Layer	# Business Logic 	C2 
+			
+			Back-End Layer		# DataBase 			C3 
+			
+			
+	Docker Compose :
+		
+		- Is an extension to Docker Engine 
+		- Is used to run more than one container as a service.
+		- Create Service Definition
+		- These Docker Compose Service Definitions(Manifest File) are created using *.yaml 
+				
+		
+		Install docker compose ::
+		
+			https://docs.docker.com/compose/install/linux/
+		
+		
+	Docker Swarm :
+	
+		
+		- It is container orchestration tool, it is meant only for docker containers.
+		- Is to ensure high availability of Containers
+		- Create replicas of containers - 5 replicas to ensure high availability.
+		- Auto-Scaling and Load Balancing is not possible with Docker Swarm 
+
+		3 - Tier Application Architecture : - Micro-Service1 
+			
+			Front-End Layer 	# User Interface 	C1 
+			
+			Application Layer	# Business Logic 	C2 
+			
+			Back-End Layer		# DataBase 			C3 
+
+
+		Replication :
+		
+			Deployment Servers :
+			
+				Production Environment:
+				
+					Prod Server1,2,3,4,5
+					
+				
+			Service :				
+			
+			Front-End Layer 	# User Interface 	C1.1,1.2,1.3,1.4
+            
+            Application Layer	# Business Logic 	C2.1,2.2,2.3,2.4
+            
+            Back-End Layer		# DataBase 			C3.1,3.2,3.3,3.4
+			
+		
+	Kubernetes :
+			
+		
