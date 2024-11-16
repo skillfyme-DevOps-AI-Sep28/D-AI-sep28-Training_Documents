@@ -1,0 +1,198 @@
+#########################
+Day - 9 | 16th Nov. 2024
+#########################
+
+	Container Orchestration Tool - Kubernetes
+	
+	
+	Kubernetes :::
+	
+	Overview of Kubernetes
+	
+	Architecture of Kubernetes
+	
+	Components of Kubernetes Architecture
+	
+	Install and Configure Kubernetes Architecture
+	
+	Kubernetes Concepts 
+	
+	Real Time Scenarios & Usecases
+	
+	
+
+	-	Overview of Kubernetes :
+	
+		- Is an Open-Source Container Orchestration Tool
+		- Used to Deployment Containerized Micro-Service Based Application Services
+		- Kubernetes is used to ensure high availability of the Containerized Application Services Deployed in Prod
+		- By Creating Relicas
+		- Self-Healing Capabilities
+		- Kubernetes supports Auto-Scaling and Load Balancing
+		- Continuous Deployment can be achived using the Kubernetes Deployment Strategies without any downtime
+		
+		- Kubernetes was owned by Google. 
+		
+		
+		Docker -- 2013 -----> 2015 
+		
+		prod implementation 
+		
+		AWS 	-> ECS/ECR/EKS
+		
+		Azure	-> ACS/ACR/AKS
+		
+		GCP		-> GCE/GCR/GKE
+		
+		
+		
+	-	Architecture of Kubernetes
+	
+		- It is based on Kubernetes Master and WorkNodes.
+		
+	- Components of Kubernetes Architecture
+	
+		- API Server 
+		- ETCD 
+		- Scheduler
+		- Controller Manager 
+		
+		- Kubelet
+		- KubeProxy 
+		- CRI - Container Runtime Interface - Container-D
+		
+	- Roles & Responsibilities ::
+	
+		- Kubernetes Developer 
+		
+		- Kubernetes Administrator
+		
+		- Kubernetes Security Administrator
+	 
+		
+	- Kubernetes Concepts / Terminologies :::
+	
+		- Pods 					# Smallest/Atomic unit of task 
+								# Pods exectute the Containers within
+		
+		- Container				# Executable unit of Container Images 
+		
+		- Images 				# Static file published in Container Registry 
+								# This act as an input for deployment
+		
+		- Cluster 				# Is a collection of Kubernetes Worker-Nodes 
+		
+		- Manifest File 		# App Config File, that defines the properties of Pods for deployment
+		
+		
+	Working with Kubernetes :
+	
+		
+		Cluster 				# Is a collection of Kubernetes Worker-Nodes 
+		
+		Kubernetes Master (VM)			# Schedule and Control the Deployment of Pods / Also called as Control Plane.
+		
+			- Kubernetes WorkNode1(VM)	# Actually used to run the pods.
+			- Kubernetes WorkNode2(VM)	# Actually used to run the pods.
+			- Kubernetes WorkNode3(VM)	# Actually used to run the pods.			
+			
+			
+		Kubectl 				# Is a Command Line Utility to interact with Kubernetes Master 
+		
+		Pods 					# Smallest/Atomic unit of task 				
+		                        # Pods exectute the Containers within
+								
+								# Pods are Deployed 
+								# Pod Networking 
+								# Intra-Pod Networking
+								# Inter-Pod Networking
+								
+								# Pods are not the permanent entities.
+								# Once the pod is deleted that IP Address also removed from that pod. 
+	
+
+	
+	Kubernetes Concepts :
+	
+		Pods 
+		
+		Controller Objects 
+		
+			- Replication Controller 
+			- Replicaset 
+			- Daemonset 
+			- Deployment 
+		
+		Kubernetes Services :
+		
+			- NodePort Service 
+			- ClusterIP 
+			- Load Balancer 
+			
+		Kubernetes Volumes :
+			- ConfigMap Volume
+			- Secret Volume 
+			- HostPath Volume 
+			- Persistant Volumes 
+			- Persistant Volume Claim 
+			
+		NameSpaces			# Logical grouping of Kubernetes Cluster 
+		
+		HELM Chart 
+								
+	
+
+	- Install and Configure Kubernetes Master Node and Worker Nodes :::
+	
+		Kubernetes Master (VM)			
+        
+        	- Kubernetes WorkNode1(VM)	
+        	- Kubernetes WorkNode2(VM)	
+			
+			
+		Using Kubeadm 
+		
+		https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
+		
+
+		Pods 
+		
+		
+		kubectl get nodes 
+		
+		kubectl get pods 
+		
+		kubectl get pods --all-namespaces
+		
+		kubectl get ns 
+		
+
+	Create/Deploy Pods :
+	
+	
+	Manifest File : --> yaml/json 
+	
+		apiversion:
+		kind:
+		metadata:
+		spec:
+		
+		
+Next :::
+
+	- Create/Deploy Pods : with eg. 
+	
+	- Login to the Pod 
+	
+		- kubectl exec -it 
+	
+	- Access the Applications running inside the port using web-browser
+	
+		- Nodeport service 
+	
+	Controller Objects 
+	
+		- Replication Controller 
+		- Replicaset 
+		- Daemonset 
+		- Deployment 		
