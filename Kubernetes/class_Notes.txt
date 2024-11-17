@@ -196,3 +196,152 @@ Next :::
 		- Replicaset 
 		- Daemonset 
 		- Deployment 		
+
+
+#########################
+Day - 10 | 17th Nov. 2024
+#########################
+
+
+	- Create/Deploy Pods : with eg. 
+	
+	- Login to the Pod 
+	
+		- kubectl exec -it 
+	
+	- Access the Applications running inside the port using web-browser
+	
+		- Nodeport service 
+		
+		
+	Create Manifest file - *.yaml
+
+	Manifest File : --> yaml/json 
+	
+		apiversion:
+		kind:
+		metadata:
+		spec:
+		
+	kubectl describe		# Used analyze the kubernetes objects
+	
+
+		- Nodeport service  ==> 30000 to 32767 
+		
+
+	Controller Objects 
+	
+		- Replication Controller 
+		- Replicaset 
+		- Daemonset 
+		- Deployment 
+		
+		
+		Replication Controller and Replicasets ::
+		
+			- Both RC and RS are used to create replicas of pods.
+			- Scale-up / Scale-Down
+			- It is used to create the replicas of pods and deploy in the cluster.
+			- It is used to run the specific number of pods
+			
+			RC uses the equality based operator 
+								Environment = "QA"
+								Environment = "DEV"
+			RS uses the Set based operator 
+								Environment : {"DEV","QA","UAT"}
+								
+			RS is based on RC 
+			
+			Replicaset can be created automatically when we create Deployment Controller Object.
+			
+			
+			kubectl create -f nginx-rc.yaml
+			
+			kubectl apply -f nginx-rc.yaml
+			
+			- Scale-up / Scale-Down ::::
+			
+				replicas : 3 
+				
+				Micro-service1 ==> 
+				
+				10 Replicas of pods ==> 100 Users  ++ 1000 users?
+				
+				+10 Replicas
+			
+		- Daemonset :
+		
+			- Is used to execute a copy of pod in all the available nodes.
+			- If any new nodes are added to the cluster, Daemonset will deploy the new pod instance in that node.
+			- If any node gets deleted, Daemonset will automatically delete that pod instance.
+			- Deletion of Daemonset will delete all the associated pod instances
+			
+			
+
+		
+		- Deployment Controller Objects ::
+		
+			Deployment Controller Object :::
+			
+				--> It is used to deploy the pods and ensure high availability of pods by creating pod replicas 
+				--> 1. Create Muliple instance/replicas/copies of pods 
+					2. Used to Scale-Up / Scale-Down the Pods 
+					3. Used to Upgrade the application pods 
+					4. Used to Down-grade/roll-back the application pods
+				--> The upgrade/down-grade of application pods can be done without any downtime. 
+				--> To achieve zero-downtime during upgrade/down-grade, By Default, it used Rolling-Update Deployment Strategy.
+				
+				
+			Rolling-Update Deployment Strategy
+			
+				- p1 ==> v1.0 ==> v2.0
+				
+				- p2 ==> v1.0
+				
+				- p3 ==> v1.0
+				
+			Blue - Green 
+			
+			Canary Deployment 
+			
+			
+		Deployment Object 
+		
+		Replicaset 
+		
+		Pod Instances 
+		
+		
+		
+		Kubernetes Volumes :
+		
+			- ConfigMap Volume
+				- Config Map Volume is used pass the config file as a input 
+				- Used to share the non-sensitive data files.
+				- Used to access the file content even outside the Pod.
+				- It is applicable at the Cluster Level. 
+				
+			- Secret Volume 
+				- Secret Volume  Volume is used pass the encypted Pod Secrets as a input 
+				- Used to share the sensitive data files.			
+				- Used to access the file content only with the pod.
+				- It is applicable at the Cluster Level. 
+
+			
+			- HostPath Volume 
+				- Is same as like Docker Volume
+				- Volume will be created in the Host Machine during Deployment
+			
+			
+		What is Application Image?
+		Containerization ?
+		
+Next :::		
+	- Persistant Volumes 
+	- Persistant Volume Claim 
+	
+	- Kubernetes Services
+	
+	- Namespaces 
+	
+	- Helm Charts
