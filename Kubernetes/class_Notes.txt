@@ -345,3 +345,225 @@ Next :::
 	- Namespaces 
 	
 	- Helm Charts
+
+
+
+
+##########################
+Day - 11 | 23rd Nov. 2024
+##########################
+
+	- Persistant Volumes 
+	- Persistant Volume Claim 
+	
+	- Kubernetes Services
+	
+	- Namespaces 
+	
+	- Helm Charts
+	
+		- Create Kubernetes Dashboard using Helm
+		
+		
+	- Persistant Volumes 
+	
+		-> Static vs Dynamic Provisioning 
+			
+	- Persistant Volume Claim 		
+
+		
+	- Kubernetes Services :::
+	
+		- NodePort Service 
+		
+		- ClusterIP 
+		
+		- Load Balancer Service (External Service from Service Provider - Managed Service)
+		
+		- Ingress Controller 
+		
+		
+	
+	
+	
+		POD -> Web Application :::
+		
+			Node Port Service ::::
+			
+			
+			
+			Front-End Pods		
+
+					fp1,2,3,4,5
+			
+			
+			Back-End Pods 
+					bp1,2,3,4,5
+					
+					
+					
+	
+	
+	
+	
+		www.google.com 						===> 	Load Balancer URL 
+		
+			Services :
+			
+				Maps 
+				Translate 
+				Drive 
+				mail 
+				
+	
+		Kubernetes Ingress Controller :::
+		
+			- Using the Rules :
+			
+			
+			Rules to Route the Request
+
+				- Simple Routing 		==> 		--> Blog Sites / Article Pages - Static Web Pages <IP/DNS>
+				
+				- Host Based Routing 
+				
+				- Path Based Routing 
+
+				www.google.com 								- Host Based Routing 
+					
+				
+				Maps 	==> 	www.maps.google.com
+				
+				translate ==>	www.translate.google.com 
+				
+				mail 		==> www.mail.google.com 		- Path Based Routing
+			
+			
+								Inbox 					www.mail.google.com/inbox 	==> NodePort_Svc1
+								
+								sent 					www.mail.google.com/sent 	==> NodePort_Svc2
+								
+								trash 					www.mail.google.com/trash 	==> NodePort_Svc3
+		
+		
+	
+	
+	
+	End-User	----	Load-Balancer	---		Ingress_Controller		----		www.mail.google.com/inbox
+												(Compose of Rules)					www.mail.google.com/sent
+																					www.mail.google.com/trash
+					
+					
+
+
+	- Namespaces ::::
+	
+		Cluster :	WN1,2,3,4,5,6
+		
+		Namespace 		# It is a Logical Partitioning of Kubernetes Cluster 
+		
+		
+		Kubernetes ::
+		
+			kubectl get pods :
+			
+			
+				 It will get the list of pods from default namespace 
+				 
+			
+			kubectl get ns :
+			
+				 To get the list of Namespaces 
+				 
+				 
+				 default 
+				 kube-flannel 
+				 kube-system 
+				 
+				 
+			kubectl get pods --all-namespaces
+			
+			
+			kubectl create namespace DEV  
+		
+			kubectl create namespace QA 
+
+			kubectl create namespace UAT  
+			
+			kubectl get pods --namespace dev 
+			
+		
+
+	Production Environment :::
+
+	
+		Production Servers : 1,2,3,4,5 
+		
+		Prod_Servers_ACTIVE 			: 1,2,3,4,5 			--> mywebapp:v1.0			==> Stop 
+		
+		
+		Application Upgrade :::		mywebapp:v2.0
+		
+							  
+		Prod_Servers_PASSIVE 			: 1,2,3,4,5 			--> mywebapp:v2.0			==> ACTIVE 
+
+
+
+		
+		Blue-Green Deployment Strategy :::
+		
+		Prod_Kubernetes_Cluster :
+		
+				: WN1,2,3,4,5,6				--> 	mywebapp:v1.0	
+
+						Create NameSpace :
+						
+							MywebappnsV1	-->     mywebapp:v1.0	
+		
+							  
+		Application Upgrade :::		mywebapp:v2.0
+		
+		
+				: WN1,2,3,4,5,6				--> mywebapp:v2.0		
+
+
+		Kubernetes Namespace 
+		
+							MywebappnsV2	-->     mywebapp:v2.0
+		
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  namespace: prodnsv2
+  labels:
+    app: nginx
+    tier: dev
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+
+    ports:
+    - containerPort: 80
+
+
+
+
+
+	
+		
+		Cluster :	WN1,2,3,4,5,6
+		
+		Non-Prod Kubernetes Cluster :
+		
+			master 
+			
+				WN1,2,3,4,5
+		
+
+Next :
+
+		- Helm Charts
+	
+		- Create Kubernetes Dashboard using Helm
