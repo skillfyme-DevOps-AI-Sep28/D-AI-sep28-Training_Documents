@@ -567,3 +567,240 @@ Next :
 		- Helm Charts
 	
 		- Create Kubernetes Dashboard using Helm
+
+
+##########################
+Day - 12 | 24th Nov. 2024
+##########################
+
+	- Helm Charts:
+	
+		- 	--> Package Manager for Kubernetes Cluster 
+		
+		
+		Package Managers ==> Used to Manage the packages - install/remove/update 
+			yum/dnf/apt	 ==> applicable at the node level
+		
+
+	Kubernetes_Cluster :
+	
+		WN1,2,3,4,5,6,7,8,9
+
+	- Create Kubernetes Dashboard using Helm
+	
+	
+Integrate Docker and Kubernetes in Jenkins CICD Pipeline :::
+
+
+	--> Onboard an Containerized application to DevOps CICD Process using Docker and Kubernetes.
+
+
+		Purpose :
+		
+		- Jenkins_Master (VM) 			# Is to create the CICD Pipeline Projects and schedule the project to run the slave nodes.
+			Jenkins_SlaveNode1(VM)		# Build Java Applications, Create Application Artifacts, Create Application Images
+
+
+
+		Tools :
+		
+		- Jenkins_Master (VM) 			# git,jdk,jenkins
+			Jenkins_SlaveNode1(VM)		# git,jdk,maven
+			
+		
+		SSH Connection to remote server :
+		
+			- HostName
+			- UserName
+			- User_Credential
+				- Key-Based Authentication (SSH Keys)
+					- Public/Private Key	
+	
+	Infra-Structure :
+	
+		Servers needed :
+		
+		- Jenkins_Master (VM) 			# Is to create the CICD Pipeline Projects and schedule the project to run the slave nodes.
+			Jenkins_SlaveNode1(VM)		# Build Java Applications, Create Application Artifacts, Create Application Images
+		- Kubernetes_Master 			# Schedule the Pods for deployments
+			Kubernetes_WorkerNode1
+			Kubernetes_WorkerNode2
+		
+		
+		Tools Needed :
+		
+		- Jenkins_Master (VM) 			# jdk,jenkins,git
+			Jenkins_SlaveNode1(VM)		# git,jdk,maven,Docker-Engine
+		- Kubernetes_Master 			# CRI,Kubeadm,kubectl,kubelet
+			Kubernetes_WorkerNode1
+			Kubernetes_WorkerNode2
+			
+	
+		Server Integration :
+		
+			Jenkins_Master should be intergrated with Kubernetes Master using Publish Over SSH Plugins 
+			Thru Jenkins Master, the Kubernetes Manifest file should be copied from jenkins_SlaveNode to Kubernetes_Master Node.
+				Using SSH Connection 
+				SSH Connection to remote server :
+				
+					- HostName
+					- UserName
+					- User_Credential
+						- Key-Based Authentication (SSH Keys)
+							- Public/Private Key	
+
+			Jenkins Master & DockerHub ???
+			
+				Create Jenkins Credentials using Dockerhub Access Token 
+				
+					docker login -u lsdf
+					
+					fgdfg
+
+		Source Code Repository :
+		
+			Src_Code 
+			
+			pom.xml
+			
+			Dockerfile 
+			
+			Kubernetes_Manifest File 
+					
+		
+	DevOps CICD Pipeline :
+	
+		Stages :
+		
+			1. SCM_Checkout 
+			2. Application Build						# get the Application Artifacts 	mywebapp.war
+			3. Docker Application Image Build			# Create Docker Application Image   mywebappImg:v1.0
+			4. Login to Container Registry(DockerHub) 
+			5. Publish the Image to DockerHub
+			6. Deploy to Kubernetes Cluster
+			
+		
+vi Dockerfile 
+
+FROM tomcat:8.0				
+COPY target/*.war /usr/local/tomcat/webapps
+EXPOSE 8080
+
+vi kubedeploy.yaml 
+
+Create Kubernetes Deployment Object
+	- deployment/replicaset/pods instances
+Create NodePort Service 
+	- NodePort Service 
+
+
+
+docker push loksaieta/skmvnapp1:v1.0
+
+vi kubedeploy.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loksai-eta-deploy
+  labels:
+    app: loksai-eta-deploy-lbl
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: loksai-eta-app
+  template:
+    metadata:
+      labels:
+        app: loksai-eta-app
+    spec:
+      containers:
+      - name: loksai-eta-container
+        image: loksaieta/sk-wd-webapp
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: loksai-eta-np-service
+  labels:
+    app: loksai-eta-app
+spec:
+  selector:
+    app: loksai-eta-deploy-lbl
+
+  type: NodePort
+  ports:
+  - nodePort: 31028
+    port: 8080
+    targetPort: 8080
+	
+
+
+
+	DevOps CICD Pipeline :
+	
+		Stages :
+		
+
+			1. SCM_Checkout 
+			2. Application Build						# get the Application Artifacts 	mywebapp.war
+			3. Docker Application Image Build			# Create Docker Application Image   mywebappImg:v1.0
+			4. Login to Container Registry(DockerHub) 
+			5. Publish the Image to DockerHub
+			6. Deploy to Kubernetes Cluster
+
+	
+pipeline {
+    
+    agent { label 'slave1' }
+
+
+	environment {	
+		DOCKERHUB_CREDENTIALS=credentials('dockerloginid')
+	}
+	
+    stages {
+        stage('SCM Checkout') {
+            steps {
+                echo 'Perform SCM Checkout'
+				git 'https://github.com/skillfyme-DevOps-AI-Sep28/java-mvn-springbapp.git'
+            }
+        }
+        stage('Application Build') {
+            steps {
+                echo 'Application Build'
+                sh 'mvn clean package'
+                
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+				sh "docker build -t loksaieta/sk-wd-webapp:${BUILD_NUMBER} ."
+				sh 'docker image list'
+				sh "docker tag loksaieta/sk-wd-webapp:${BUILD_NUMBER} loksaieta/sk-wd-webapp:latest"
+            }
+        }
+		stage('Login2DockerHub') {
+
+			steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}		
+		stage('Publish_to_Docker_Registry') {
+			steps {
+				sh "docker push loksaieta/sk-wd-webapp:latest"
+			}
+		}		
+        stage('Deploy to Kubernetest Cluster') {
+            steps {
+                script{
+                    sshPublisher(publishers: [sshPublisherDesc(configName: 'Kube_Master', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'kubectl apply -f kubedeploy.yaml', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '*.yaml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                }
+            }
+        }
+    }
+}
+
