@@ -1,0 +1,118 @@
+##########################
+Day - 13 | 7th Dec. 2024
+##########################	
+		
+	IAC Tools :
+	
+		--> Infra-Structure As Code :
+			
+				- Declarative Scripts 
+				- Based on Json / Yaml file formats
+				
+				
+	
+		Configuration Management 	: 	Ansible 
+		
+		Server Provisioning			:	Terraform
+		
+		
+		
+	Infra-Structure Management Team :::
+	
+	
+	Eg.: 
+	
+		Team -> 50 Test Servers to be created and Configured with the testing tools 
+	
+	
+	Configuration Management System	: 	Ansible 
+	
+	Test Environments :
+	
+		Web Application E_Commerce App:
+		
+			Test Environments 
+			
+			Test Servers --> 'n' no. of Test Servers 
+			
+			
+	Ansible :
+	
+		- Why Ansible ?
+	
+		- Ansible Architecture
+		
+		- Ansible Architecture Components 
+		
+		- How to interact with Ansible 
+		
+			- Adhoc Commands 
+			
+			- Ansible Playbooks 
+			
+		- Ansible Terminologies and Concepts 
+		
+		- Ansible Roles 
+		
+	Use Case :
+	
+		Build Server :
+		
+			- Tools : git, jdk, maven, docker 
+			
+		Ansible :
+		
+		- Ansible Architecture Components 
+
+			- Ansible Controller
+			- Ansible Nodes 
+			- Inventory
+			- Modules 
+			- Ansible Config File 
+			- SSH Connection to Ansible Nodes
+			
+		
+		- How to interact with Ansible ::::::
+		
+			- Adhoc Commands :
+				- Are used to run a specific module/task in the Ansible nodes. 
+				- Cannot be reusable
+				
+				apt install jdk-11 -y
+			
+			- Ansible Playbooks 		- Scripts written using *.yaml 
+			
+				- Are used to run the series of modules/tasks in the Ansible nodes.
+				- Ansible Playbooks are reusable 
+				
+				Tomcat Server :					my_sql Database server 
+				
+					install jdk 					install the pre-requisites
+					
+					install tomcat 					install my_sql package 
+					
+					start tomcat server 			start my_sql server 
+					
+													create database 
+												
+			
+		- Inventory File :
+			
+			Ansible Controller   ---> 	Ansible Nodes 
+	
+	
+		- Ansible Terminologies and Concepts 
+			Working with Ansible :
+			
+			
+			Ansible_Controller (VM) 		# Install Ansible 
+			
+				Ansible_Node1 (VM)			
+				Ansible_Node2 (VM)
+				
+				
+Next ::
+
+	Ansible Playbooks 
+			
+		
