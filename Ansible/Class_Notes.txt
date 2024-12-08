@@ -115,4 +115,58 @@ Next ::
 
 	Ansible Playbooks 
 			
+
+##########################
+Day - 14 | 8th Dec. 2024
+##########################			
+
+	- Ansible Playbooks 
+	
+	- Handling Variables
+	
+	- Ansible Playbooks 		- Scripts written using *.yaml 
+	
+		- Are used to run the series of modules/tasks in the Ansible nodes.
+		- Ansible Playbooks are reusable 	
 		
+		
+		
+	- Handling Variables :
+	
+		- Environment Variables 	-- captured using setup module.
+			
+			ansible_facts :
+				ansible_distribution
+				ansible_system
+				ansible_os_family
+		
+		- User-defined Variables 
+		
+			- Declared by the Users in the Playbook
+			- Used to parameterize the Ansible Playbooks
+			
+		
+		Playbooks using Variables :::
+		
+
+
+	- Handlers 
+	
+		task:
+			install jdk
+			install tomcat
+			start tomcat 
+		
+	- Ansible Roles 
+		
+		
+		- Ansible Galaxy :  https://galaxy.ansible.com/ui/
+		
+		
+		ansible-galaxy init testrole1					# To create Ansible Role 
+		ansible-galaxy role install socket_es.tomcat	# Download Ansibe Role 
+		
+		
+Next :::
+
+	- Terraform
