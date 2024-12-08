@@ -268,3 +268,381 @@ ansible samplenode1 -m copy -a "src=/etc/ansible/s1.txt dest=/home/ansibleadmin 
 ansible samplenode1 -m fetch -a "src=/home/ansibleadmin/filefrom_AN1.txt dest=/home/devopsadmin"
 
 
+
+#**************************************************************************************************************************
+
+Ansible Playbooks :::
+
+*.yaml scripts 		==> Key-value pair
+
+- Playbook creation
+
+
+
+Playbooks :::::
+
+	- *.yaml Script
+	- Defines the Tasks/Modules to be executed in target nodes.
+	- Reusability
+	
+	
+Build Server :::
+
+	- install jdk 
+	- install git 
+	- install maven
+
+
+#**************************************************************************************************************************
+#Ansible Variables !
+#shell : echo $var1 
+
+in yaml : "{{var1}}"
+
+
+ansible samplenode1 -m setup
+
+debug - 
+	msg 	- used to print the constant value and variable data
+	var 	- used to print only the variable data
+
+key:Value pair 
+
+#debugmod.yaml / *.yml
+
+---
+ - hosts: testnodes
+   tasks:
+   - debug:  
+      msg:
+       - "The os distribution is: {{ansible_distribution}}" 
+       - "THe os name is: {{ansible_system}}"
+       - "The os family is: {{ansible_os_family}}"
+	   
+	   
+	Execute :::
+	
+			ansible-playbook debugmod.yaml 
+echo "${var1}" $var1
+
+"{{var1}}"
+
+debug -a msg / var 
+
+
+Debug Module :
+	msg 
+	var  "{{ansible_distribution}}"
+	
+	"{{var1}}"
+
+echo $var1
+
+
+setup Module :
+
+setup module is the default module.
+
+YAML ::
+
+			"{{var1}}"
+
+	debug :
+		msg 
+		var 
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~~~ test_var-datatype.yaml
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#test_var-datatype.yaml
+---
+ - hosts: samplenode1
+   vars:
+    x: 23
+    my_num: 45.67
+    my_name: Loksai
+    my_b: YES   
+   tasks:
+   - debug:
+      msg:
+       - "The value of x is: {{x}}"
+       - "THe value of my_num: {{my_num}}"
+       - "The value of my_name : {{my_name}}"
+       - "THe value of my_b is: {{my_b}}"
+
+
+
+---
+ - hosts: testnodes
+   become: yes
+   tasks:
+   - name: Manage nginx tool
+     apt:
+       name: nginx
+       state: present
+
+
+
+
+
+	name : nginx
+	
+	state : present/absent/latest
+	
+	sudo apt install nginx			# In Linux Ubuntu 
+
+
+
+	   
+apt install git -y
+
+apt remove git -y
+
+name : Used to identify the Name of the Package 
+
+state : Used to define the state - present/absent/latest	   
+	   
+Package Manager :::: Is used to Manage the Packages in the Node - Install/Uninstall/Upgrade
+
+	apt 	ubuntu 
+	yum
+	dnf
+	rpm 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+git ==> apt install/uninstall/update 
+
+apt ::
+
+	name : <name of the package>
+	
+	state : present/absent/latest 
+
+
+
+#var3.yaml
+---
+ - hosts: "{{ host_name }}"
+   become: yes
+   tasks:
+   - name: Manage "{{ tool_name }}" service
+     apt:
+       name: "{{ tool_name }}"
+       state: "{{ tool_state }}"
+
+
+
+ansible-playbook var4.yaml -e "host_name=testnodes tool_name=nginx tool_state=present"
+
+
+Handling Variables in Ansible :::
+
+	- Environment variables -- accessible using Setup Module.
+	
+	- Hardcoding the values in playbook 
+		using vars :
+	
+	- Using External Variable files :
+		using var_files
+
+	- Using -e to pass the values at run time.
+
+
+
+#ansible-playbook testfile.yaml --syntax-check
+
+
+
+Using When Condition :::
+
+---
+  - hosts: testnodes
+    become: yes
+    tasks:
+      - name: Install-nginx on Debian
+        apt:
+          name: nginx
+          state: "{{pkg_state}}"
+        when: ansible_os_family == "Debian"
+      - name: Install-nginx on Redhat
+        yum:
+          name: nginx
+          state: "{{pkg_state}}"
+        when: ansible_os_family == "RedHat"
+
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~~~ register and set-facts
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#test_var-datatype.yaml
+---
+ - hosts: samplenode1
+   gather_facts: false
+   tasks:
+   - shell: "bash --version"
+
+
+
+#test_var-datatype.yaml
+---
+ - hosts: samplenode1
+   tasks:
+   - shell: "bash --version"
+     register: bash_ver
+   - debug: var=bash_ver
+
+		  
+Handlers --> are used to control the flow of playbook execution, based on the previous modules
+		This can be done thru notify key.
+
+		Handlers are same as tasks.
+		But, it gets executed only if we notify.
+
+
+
+Handlers :::
+
+	Handlers are used to control the flow of execution of tasks.
+	
+	Tasks 1 :::
+	
+	QA_Server 
+	
+		Tomcat :::
+				
+			1. Install the Pre-requisites		# jdk 			# jdk 
+			2. Install the actual tool 			# tomcat 		# jenkins 
+			3. Configure/setup the tool			# start tomcat  # unlock jenkins and setup
+
+
+
+		  
+Ansible Roles ::::
+	
+
+
+	
+		  
+Ansible Roles :::
+
+		Are used to organize the Ansible Components 
+		
+		for Reusability
+		
+		Use git remote repositories to maintain the Ansible Roles.
+		
+			variable/handlers/defaults/secrets/tasks
+			
+			Playbooks 
+			
+			
+		Roles can be created using :::
+		
+			- ansible-galaxy init testrole1 
+				Roles can be defined at enterprise level / global level.
+				
+			
+
+
+
+
+
+		
+Working with Handlers using Ansible Roles :::
+
+
+ansible-galaxy init testrole1
+
+---
+# tasks file for testrole1
+      - name: Install-nginx
+        apt:
+          name: nginx
+          state: present
+        notify:
+        - start-nginx
+
+
+---
+# handlers file for testrole1
+    - name: start-nginx
+      service:
+          name: nginx
+          state: started
+
+
+---
+- hosts: samplenode1
+  become: yes
+  roles:
+    - role: testrole1
+    - role: testrole
+
+---
+- hosts: {{host_name}}
+  become: yes
+  roles:
+    - role: {{role_name}}	
+
+
+
+
+
+Loops :
+
+---
+  - hosts: samplenode1
+    become: yes
+    tasks:
+      - apt:
+         name: git
+         state: present
+      - apt:
+         name: maven
+         state: present
+      - apt:
+         name: nginx
+         state: present
+
+
+
+
+Loops :::
+
+---
+  - hosts: samplenode1
+    gather_facts: false
+    become: yes
+    tasks:
+      - apt:
+         name: "{{item}}"
+         state: absent
+        loop:
+          - git
+          - maven
+          - nginx
+ 
+ 
+ 
