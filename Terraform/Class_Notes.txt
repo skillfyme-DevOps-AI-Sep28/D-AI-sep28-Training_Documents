@@ -1,0 +1,223 @@
+			
+
+
+##########################
+Day - 15 | 14th Dec. 2024
+##########################
+
+
+	Infra-Structure As Code using Terraform ::::
+	
+	Fundamentals of Terraform :::
+	
+	AWS Resources provisioning using Terraform
+	
+	Ansible - Configuration Management 
+	
+	AWS/Az/GC
+	
+	Terraform Architecture :
+	
+	Terraform Working Principles / Process :
+	
+	Install Terraform on Local Windows Machine 
+	
+	
+	
+	Terraform - HCL Scripting - Declarative Script.
+	
+	Terraform Working Process :
+	
+		- Identify the Scope		# AWS/Azure/GCP/VMWARE 
+		
+		- Write the Terraform Script based on the Scope of Resource
+		
+		- Perform Terraform Init 	# Initialize Terraform Project with Terraform registry
+		
+		- Perform Terraform Plan	# To preview the Terraform Script and Resource defintion
+	
+		- Perform Terraform Apply 	# Perform Actual Changes in the targets
+	
+	Install Terraform :::		
+	
+		https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
+		
+		On Windows Machine :::
+		
+			1. https://developer.hashicorp.com/terraform/install
+		
+				- Download AMD64 
+				
+				- get Terraform_cli.zip
+				
+				- Extract and configure. 
+				
+				- Configure Environment Variable 
+				
+					- Using the Terraform exec path 
+					
+				
+				
+			2. Install Visual Studio Code - IDE 
+				
+				https://code.visualstudio.com/download
+			
+				- Install Official - Hashicorp Terraform Extension for VS Code
+				
+				- Open Terminal to execute Terraform Cli Commands 
+				
+				
+			3. Create Terraform Scripts
+			
+				Terraform Registry
+	
+	
+		Terraform Working Process :
+	
+		- Identify the Scope		# AWS/Azure/GCP/VMWARE 
+		
+		- Write the Terraform Script based on the Scope of Resource
+		
+		- Perform Terraform Init 	# Initialize Terraform Project with Terraform registry
+		
+		- Perform Terraform Plan	# To preview the Terraform Script and Resource defintion
+	
+		- Perform Terraform Apply 	# Perform Actual Changes in the targets
+		
+
+		- Using Terraform :
+		
+			- Add/Create Resource  		+
+			
+			- Update/Change Resource 	~
+			
+			- Remove/Destroy Resource 	-
+			
+			
+	Terraform Statefile ::::
+	
+		- Used to maintain the state of the resources. 
+		
+		
+##########################
+Day - 16 | 15th Dec. 2024
+##########################
+
+	Terraform Statefile ::::
+	
+		- Used to maintain the state of the resources. 
+		
+	Setup a complete Infra-Structure using Terraform
+	
+	Integrate Terraform with Jenkins - Best Practise
+	
+	
+	Create a dedicated Test Environment :
+	
+	Created Dynamically!
+	
+	VPC/Subnet/
+
+#aws.tf :	
+
+provider "aws" {
+  region     = "ap-south-1"
+  access_key = "sfsfsdf"
+  secret_key = "asdfasdfasd"
+}
+
+# Create AWS Instance
+
+resource "aws_instance" "instance1" {
+  
+  ami           = "ami-0614680123427b75e"
+  instance_type = "t2.micro"
+  key_name      = "may20-keypair"
+  count = 3
+
+  tags = {
+    Name = "Dummy-Instance1"
+  }
+}
+
+
+	instance1[0] 
+	
+	terraform apply -auto-approve
+	
+	terraform destory -auto-approve
+	
+How this can be implemented as part of CI/CD ?
+
+
+	Jenkins_Master :		
+	
+		Jenkins_Slave_Node1 : Install Terraform 
+
+		Jenkins_Slave_Node2 : Application Build Tools
+		
+CICD Pipeline :
+
+	- SCM_Checkout 
+	- Application Build 
+	- Deploy to QA_Server 		# Test Environment :
+
+Scenario 1 :
+
+
+	- Terraform Script in a github repo.
+	
+	Pipeline 1:	(Infra-Structure Provisioning)
+		Agent : Jenkins_Slave_Node1
+	
+		- SCM_Checkout 
+		- Execute Terraform Plan 
+		- Execute Terraform Apply 
+	
+
+	Pipeline 2:	(Application Build)
+		Agent : Jenkins_Slave_Node2
+		
+		- SCM_Checkout 
+		- Application Build 
+		- Deploy to QA_Server 
+		
+
+Scenario 2 :	gitOps 
+
+
+	Pipeline 1 :
+	
+	Agent : Jenkins_Slave_Node2
+	
+		- SCM_Checkout
+			Agent : Jenkins_Slave_Node2
+		- Application Build 
+			Agent : Jenkins_Slave_Node2
+		- SCM_Checkout Execute Terraform Plan
+			Agent : Jenkins_Slave_Node1
+		- Execute Terraform Apply to Create New_QA_Server 
+			Agent : Jenkins_Slave_Node1
+		- Install Required Testing Tools in New_QA_Server using Terraform UserData
+		- Deploy to New_QA_Server 
+			Agent : Jenkins_Slave_Node2
+			
+		- Automate Testing 
+		
+		- Destroy the New_QA_Server
+
+
+		Kubernetes Cluster using Terraform !		
+		
+		
+	
+
+
+	Jenkins_Master :		
+	
+		Jenkins_Slave_Node1 : Install Terraform 		(Infra-Structure Provisioning & Configurations using Terraform)
+		
+		Jenkins_Slave_Node2 : Application Build Tools(java)
+		Jenkins_Slave_Node3 : Application Build Tools(.Net)
+		Jenkins_Slave_Node4 : Application Build Tools(Python)
+		
