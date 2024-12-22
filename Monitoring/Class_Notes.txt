@@ -1,0 +1,115 @@
+##########################
+Day - 17 | 21st Dec. 2024
+##########################
+
+	Monitoring ::
+
+
+	Continuous Monitoring!
+	
+		-> Infra-Structure Monitoring 
+				Production Environment :
+					Prod Servers - High availability!
+					
+					Kubernetes_Cluster 
+						Kubernetes_WorkerNode1,2,3,4,5,6,7
+						
+						CPU 			100%			
+						Memory 			100%
+						Network Traffic
+			
+			Production Monitoring/Support Team
+						
+			Monitoring Tools :::
+			
+				Prometheus/Grafana/Nagios/Splunk/Dynatrace
+				
+				Usage of CPU/Memory --> 75% 
+		
+		
+		-> Application Monitoring
+		
+				Services
+					
+				AppDynamics/Datadog
+				
+				
+	
+	Architecture of Monitoring Tool :
+	
+		Client & Server Architecture
+		
+			Prometheus Server 
+		
+			Target Nodes 
+		
+			Time Series Database 
+		
+		Prometheus 	: Monitoring Tool
+						Default Port: 9090
+					  Prometheus acts as a Data Source to Grafana.	
+		Grafana		: Visualization Tool  
+			3000
+	
+				
+	Working with Prometheus and Grafana ::
+	
+		Install Prometheus & Grafana :
+		
+		
+##########################
+Day - 18 | 22nd Dec. 2024
+##########################		
+	
+	Monitoring Kubernetes_Cluster and Pods using Prometheus & Grafana :::
+	
+	
+	Install Prometheus & Grafana using Helm.
+	
+	Prometheus & Grafana runs as a service
+	
+################################################################################################333333
+
+# Prometheus & Grafana on Kubernetes using Helm 
+
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm search repo prometheus-community
+helm search repo prometheus-community/kube-prometheus-stack
+helm search repo prometheus-community/kube-prometheus-stack --versions
+helm install prometheus prometheus-community/kube-prometheus-stack --version 45.7.1 --namespace monitoring --create-namespace
+kubectl get pods -n monitoring
+kubectl get pods --all-namespace
+kubectl get svc
+kubectl get svc -n monitoring
+//kubectl port-forward svc/prometheus-operated -n monitoring 9090:9090
+//kubectl edit svc prometheus-operated
+kubectl get svc -n monitoring
+//kubectl edit svc prometheus-operated -n monitoring
+kubectl edit svc prometheus-kube-prometheus-prometheus -n monitoring
+#goto type: key && Change ClusterIP to NodePort & save the file
+#30000 - 32767 
+#Now check the service, it should show you, NortPort with Nodeport IP
+kubectl get svc -n monitoring
+kubectl edit svc prometheus-grafana -n monitoring
+#goto type: key && Change ClusterIP to NodePort & save the file
+#30000 - 32767 
+#Now check the service, it should show you, NortPort with Nodeport IP
+kubectl get svc -n monitoring
+kubectl get secret -n monitoring prometheus-grafana -o jsonpath="{.data.admin-password}" | base64 --decode
+
+
+Take the public_ip address fo kubernetes master node. 
+Eg>: https://<k_master_public_ip_address:<NodePort>/
+
+Prometheus:
+13.201.43.99:32538
+
+Grafana:
+13.201.43.99:30902
+
+###########Grafana Dashboard :
+
+#User Name : admin
+#Password: prom-operator
+
+############################################################################################################################3
