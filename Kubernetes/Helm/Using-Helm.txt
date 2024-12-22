@@ -1,0 +1,120 @@
+HELM Chart:::
+Helm is a pkg manager for kubernetes
+which help to automatically create manifest files for any kubernetes objects in the form of HELM Charts
+
+HELM Chart for prometheus
+
+Eg.: Kubernetes Dashboard installation using HELM
+
+Install HELM   https://helm.sh/docs/intro/install/
+on kubernetes master node install Helm
+
+#Downlaod helm tar ball for linux
+
+wget https://get.helm.sh/helm-v3.14.0-linux-amd64.tar.gz
+
+wget https://github.com/helm/helm/releases/download/v3.16.3/helm-v3.16.3-linux-amd64.tar.gz.asc
+
+https://github.com/helm/helm/archive/refs/tags/v3.16.3.tar.gz
+
+// https://get.helm.sh/helm-v3.16.2-linux-amd64.tar.gz
+
+
+#Extract tar ball
+
+tar -zxvf helm-v3.14.0-linux-amd64.tar.gz 
+
+#Move helm to usr/local/bin/helm
+sudo mv linux-amd64/helm /usr/local/bin/helm
+
+#run helm
+helm
+
+#Install Kubernetes Dashboard using Helm
+
+helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard
+
+helm install kubernetes-dashboard kubernetes-dashboard/kubernetes-dashboard
+
+kubectl get svc 
+
+#choose kubernetes-dashboard service 
+#kubectl -n default port-forward svc/kubernetes-dashboard-kong-proxy 8443:443
+
+kubectl edit svc kubernetes-dashboard-kong-proxy
+
+#goto type: key && Change ClusterIP to NodePort & save the file
+
+#30000 - 32767 
+
+#Now check the service, it should show you, NortPort with Nodeport IP
+
+kubectl get svc 
+
+# Now use the external IP & Nodeport to access the dashboard. When it asked for token, execute following commands to create service account & token
+
+kubectl create serviceaccount dashboard -n default
+
+kubectl create clusterrolebinding dashboard-admin -n default --clusterrole=cluster-admin --serviceaccount=default:dashboard
+
+
+
+kubectl create token dashboard
+
+Take the public_ip address fo kubernetes master node. 
+Eg>: https://<k_master_public_ip_address:<NodePort>/
+
+Change http to https as shown below ::
+13.126.130.57
+
+https://65.2.63.214:31348/
+
+
+https://3.110.191.175:31730/
+
+
+################################################################################################333333
+
+# Prometheus & Grafana on Kubernetes using Helm 
+
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm search repo prometheus-community
+helm search repo prometheus-community/kube-prometheus-stack
+helm search repo prometheus-community/kube-prometheus-stack --versions
+helm install prometheus prometheus-community/kube-prometheus-stack --version 45.7.1 --namespace monitoring --create-namespace
+kubectl get pods -n monitoring
+kubectl get pods --all-namespace
+kubectl get svc
+kubectl get svc -n monitoring
+//kubectl port-forward svc/prometheus-operated -n monitoring 9090:9090
+//kubectl edit svc prometheus-operated
+kubectl get svc -n monitoring
+//kubectl edit svc prometheus-operated -n monitoring
+kubectl edit svc prometheus-kube-prometheus-prometheus -n monitoring
+#goto type: key && Change ClusterIP to NodePort & save the file
+#30000 - 32767 
+#Now check the service, it should show you, NortPort with Nodeport IP
+kubectl get svc -n monitoring
+kubectl edit svc prometheus-grafana -n monitoring
+#goto type: key && Change ClusterIP to NodePort & save the file
+#30000 - 32767 
+#Now check the service, it should show you, NortPort with Nodeport IP
+kubectl get svc -n monitoring
+kubectl get secret -n monitoring prometheus-grafana -o jsonpath="{.data.admin-password}" | base64 --decode
+
+
+Take the public_ip address fo kubernetes master node. 
+Eg>: https://<k_master_public_ip_address:<NodePort>/
+
+Prometheus:
+13.201.43.99:32538
+
+Grafana:
+13.201.43.99:30902
+
+###########Grafana Dashboard :
+
+#User Name : admin
+#Password: prom-operator
+
+############################################################################################################################
