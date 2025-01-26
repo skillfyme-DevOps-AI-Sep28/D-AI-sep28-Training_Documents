@@ -1,0 +1,179 @@
+	
+##########################
+Day - 23 | 19th Jan 2025
+##########################	
+
+	
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: loksai-eta-argo-app
+  namespace: argocd-app1-ns
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/skillfyme-DevOps-AI-Sep28/java-mvn-springbapp.git
+    targetRevision: HEAD
+    path: .
+
+  destination: 
+    server: https://kubernetes.default.svc
+    namespace: argocd-app1-ns
+
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+
+    automated:
+      selfHeal: true
+      prune: true		
+	
+	
+Module 7: DevOps with AI ( DevOps with AI Certification)
+
+AI-Driven Automation
+Predictive Analytics for DevOps
+Incident Management and Root Cause Analysis
+Enhancing Security with AI in DevOp( AIOps)
+AI-Enhanced Monitoring and Observability
+AI-Driven Optimization and Self-Healing Systems		
+
+
+
+DevOps with AI :::
+
+	AI 		-->	It just refers to any development of computing system which can simulate human intelligence.
+	
+	DevOps 	--> Uses Strategies to streamline and Automate the Application Build and Deployment.
+		
+		
+Types of AI used in DevOps :
+
+	- Machine Learning 
+	
+	- Natural Lang. Processing 
+	
+	- Chatbots
+	
+	- Virtual Assistants 
+			
+These solutions are used improve the quality of software product :
+
+	- Improves Accuracy
+	
+	- Improves Efficiency and Speed of Delivery
+
+	- Resource Management 
+	
+	- Enhanced Security 
+		
+
+Implement AI in DevOps :::
+
+	 @ CICD.
+	 
+	- Automate the Testing using AI ********
+	 
+		Test.ai 
+		
+	- Source Code Development 
+	
+		- IDEs to develop the source code.
+		
+		  Extension/Plugins like AI Assisted Code Suggestions.
+		
+			if
+			
+			if (){
+			}
+			else (){
+			}
+		
+		- Code Quality Analysis :
+		
+			SonarQube Analysis 
+			
+				--> Check Coding Standards 
+				
+				--> Code Security
+
+				--> Code Coverage
+				
+				--> Test Coverage 
+				
+	- Monitoring & Alert Mechanism using AI :
+	
+		AI --> Auto generate alerts 
+		
+		
+	- Logging :
+	
+		- Report Generation 
+		
+		- Root Cause Analysis using AI 
+		
+		- Code Quality 
+		
+		- Analyze/ Understand Vulnerabilities 
+		
+	- Continuous Improvement 
+	
+	AI can be integrated with DevOps :
+	for ;
+	
+	--> Automate Code Quality Analysis
+	
+	--> Monitoring & Alert Mechinism using AI
+			- Logging 
+			- Reporting 
+			- Dashboard 
+
+	AI Tools :
+		- Dynatrace Davis
+		- Amazon CodeGuru -
+		- DataDog - AI & ML for monitoring.
+		
+			
+	--> CD --> Predictive Analysis of Deployment Success/Failure Rates :
+	
+		3 Times --> Historical Data and Recommendations
+	
+	Cost Efficiency :::
+	
+	
+	
+##########################
+Day - 24 | 25th Jan 2025
+##########################	
+
+	AI Tools ::
+	
+		- Monitoring 
+		- Gen AI 
+		- Predictive Analysis
+		- Troubleshooting
+	
+	
+##########################
+Day - 25 | 26th Jan 2025
+##########################	
+		
+		
+		AI Tool :
+		
+			k8sGPT :
+			
+			openai --> login to 
+		
+		https://openai.com/
+		
+		
+		
+		https://github.com/k8sgpt-ai/k8sgpt
+
+
+
+3-Tier Applications in Kubernetes :::
+
+	
