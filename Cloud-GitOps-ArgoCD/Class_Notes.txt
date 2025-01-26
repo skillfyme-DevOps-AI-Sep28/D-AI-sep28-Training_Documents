@@ -1,0 +1,289 @@
+
+	
+	
+##########################
+Day - 19 | 4th Jan 2025
+##########################
+
+
+	Jenkins : 		groovy scripts 
+	
+	yaml scripts:
+	
+		github actions
+		
+		azure pipeline
+		aws code pipeline
+		gitlab-ci
+		
+		
+	github repositories	--> used for open-source projects
+		- github actions	 create cicd pipelines
+		- Jenkins : 		groovy scripts 
+	azure repositories  --> used for enterprise level
+		- azure pipeline	 create cicd pipelines
+	
+	
+	
+
+
+	Istio - Traffic Management / mTSL / Observability 
+	
+	
+	Micro-services :
+		deploy using kubernetes :
+		
+		pods - 1 micro-service
+	
+	E_Commerce Portal
+	
+	amazon.com
+	
+	sign-in
+	sign-up
+	search
+	add to cart 
+	payment
+	confirm order 
+	track
+	
+	
+	
+##########################
+Day - 20 | 11th Jan 2025
+##########################
+
+
+	Overview of Cloud Services - GCP/AWS/Azure.
+	
+	
+	DevOps Solution can be based on :
+	
+		Managed Services : 
+		
+			AWS/Azure/GCP
+	
+		Self Managed / Open-Source DevOps Services :
+		
+			VMs & Install the open-source DevOps Tools and Services 
+			
+			
+	- Fundamentals of Cloud Computing
+	
+	- Overview of GCP Services.
+	
+	- How to access GCP and Use GCP - Cloud Services 
+	
+	- GCP / AWS / Azure 
+	
+	- DevOps Services 
+	
+	
+
+##########################
+Day - 21 | 12th Jan 2025
+##########################		
+			
+	
+	AWS Cloud :::
+	
+	AWS DevOps Services :::
+	
+	
+	AWS Cloud :::
+	
+		IAM Service 
+		EC2 Services
+		Container Services 
+		RDS 
+		AWS DevOps Services :
+		
+			AWS Code Commit
+			AWS Code Build 
+			AWS Code Deploy 
+			AWS Code Pipeline 
+			IAC Tools - Cloudformation 
+			
+	GitOps :
+		Argo-CD 
+		
+	
+	EC2 Services :::
+	
+		Create EC2 Instance - Virtual Machines 
+		
+			- AMI - Amazon Machine Image - Template 
+			
+			Test Environment :
+			
+				- VM --> Testing Tools ===> Create an AMI 
+				- Destroyed 
+			
+			IAM Role :
+			
+				ec2 instance -->
+				
+				s3 service 
+				
+	
+##########################
+Day - 22 | 18th Jan 2025
+##########################			
+	
+	GitOps :::
+	
+		Argo-CD 
+		
+	DevOps using AI : Case Study 
+	
+	
+	DevOps 
+	GITOps -> Is strategy / Approach to Automate Deployment/Infra-Structure Changes using GIT Repositories.
+	
+	
+	
+	Distributed VCS ::		To Version Control the Application Source Code.
+	
+		GitHub 
+		GitLab 
+		Bitbucket
+		AWS Code Commit 
+		Azure Repository
+	
+	
+		Evolution of SDLC Process :
+		
+			Waterfall,Agile,DevOps,DevSecOps,GITOps,AIOps,MLOps,...
+			
+			
+
+	Infra-Structure Provisioning & Configurations
+	
+	Create IAC Scripts :
+	
+		Terraform & Ansible 
+	
+	Kubernetes :: Manifest --> *.yaml ==> Declarative Script
+	
+	Versioning :::
+	
+	IAC Scripts 
+	
+		aws.tf 
+		
+		tfstate file 
+		
+	Jenkins --> CICD Pipelines 
+	
+		--> Automate the Application Builds and Deployments 
+		--> github webhook.
+		
+	GitOps Strategy :::
+	
+		Argo-CD  
+		Flux-CD
+		
+	Kubernetes ==> Deployment of Containerized Micro-services.
+	
+	HELM Charts 
+	
+		--> Kubernetes Dashboards 
+		--> Monitor Kubernetes Cluster using Prometheus & Grafana 
+		
+		
+	Src_Code Repository :::
+	
+		SRC 
+			*.java
+		pom.xml 
+		Dockerfile 
+		Kubernetes
+		
+		
+	github webook will trigger the build 
+	
+	DevOps CICD Pipeline :
+	
+		Stages :
+			Build Pipeline - using Jenkins :
+			
+			1. SCM_Checkout 
+			2. Application Build						# get the Application Artifacts 	mywebapp.war
+			3. Docker Application Image Build			# Create Docker Application Image   mywebappImg:v1.0
+			4. Login to Container Registry(DockerHub) 
+			5. Publish the Image to DockerHub
+			
+			Release Pipeline - using Argo-CD
+			
+			6. Deploy to Kubernetes Cluster
+			
+	Argo-CD --> Create Continuous Deployment Pipeline 
+	Flux-CD --> 
+	
+	Build Pipeline 
+	
+	Release Pipeline 
+	
+	github Repository -->
+	Kubernetes Master --> 
+		WN1,2,3
+		
+		
+	Create Argo-CD Application :::
+		- Using Manifest file 
+		
+		- Using GUI 
+		
+		
+	Jenkins CI / CD Pipeline 
+
+		Stages :
+			Build Pipeline - using Jenkins :
+			
+			1. SCM_Checkout 
+			2. Application Build						# get the Application Artifacts 	mywebapp.war
+			3. Docker Application Image Build			# Create Docker Application Image   mywebappImg:v1.0
+			4. Login to Container Registry(DockerHub) 
+			5. Publish the Image to DockerHub
+			6. Create Argo-CD Application Using Argo-CD Application Manifest file
+			6. Deploy to Kubernetes Cluster
+			
+			
+			manifest/kubedeploy.yaml 
+					/argo-cd-appln.yaml
+					
+					
+	Install and Configure Argo-CD on Kubernetes Master :::::
+	
+	
+	
+##########################
+Day - 23 | 19th Jan 2025
+##########################	
+
+	
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: loksai-eta-argo-app
+  namespace: argocd-app1-ns
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/skillfyme-DevOps-AI-Sep28/java-mvn-springbapp.git
+    targetRevision: HEAD
+    path: .
+
+  destination: 
+    server: https://kubernetes.default.svc
+    namespace: argocd-app1-ns
+
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+
+    automated:
+      selfHeal: true
+      prune: true		
+	
